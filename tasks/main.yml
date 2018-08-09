@@ -21,6 +21,16 @@
   notify:
     - restart software
 
+- name: add haproxy_stats_port to http_port_t selinux type
+  seport:
+    ports: "{{ haproxy_stats_port }}"
+    proto: tcp
+    setype: http_port_t
+    state: present
+  when:
+    - ansible_selinux.status is defined
+    - ansible_selinux.status == "enabled"
+
 - name: start and enable software
   service:
     name: haproxy

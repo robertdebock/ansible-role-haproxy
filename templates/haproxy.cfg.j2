@@ -30,7 +30,8 @@ defaults
     maxconn                 3000
 
 {% if haproxy_stats == true %}
-listen stats :1936
+listen stats
+    bind                 :{{ haproxy_stats_port }}
     mode                 http
     stats                enable
     stats                uri /
@@ -38,14 +39,14 @@ listen stats :1936
 
 {% for frontend in haproxy_frontends %}
 frontend {{ frontend.name }}
-  bind {{ frontend.bind }}
-  default_backend {{ frontend.default_backend }}
+    bind {{ frontend.bind }}
+    default_backend {{ frontend.default_backend }}
 {% endfor %}
 
 {% for backend in haproxy_backends %}
 backend {{ backend.name }}
-  balance {{ backend.balance }}
+    balance {{ backend.balance }}
   {% for server in backend.servers %}
-  server {{ server.name }} {{ server.hostname }}:{{ server.port}}{% if server.option is defined %} {{ server.option }}{% endif %}
+    server {{ server.name }} {{ server.hostname }}:{{ server.port}}{% if server.option is defined %} {{ server.option }}{% endif %}
   {% endfor %}
 {% endfor %}

@@ -1,6 +1,7 @@
 ---
 # defaults file for haproxy
 haproxy_stats: yes
+haproxy_stats_port: 1936
 
 haproxy_frontends:
   - name: main
