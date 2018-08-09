@@ -1,2 +1,15 @@
 ---
 # defaults file for haproxy
+haproxy_frontends:
+  - name: main
+    bind: "*:80"
+    default_backend: app
+
+haproxy_backends:
+  - name: app
+    balance: roundrobin
+    servers:
+      - name: app1
+        hostname: 127.0.0.1
+        port: 5001
+        option: check
