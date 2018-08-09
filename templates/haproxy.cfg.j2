@@ -34,7 +34,7 @@ listen stats
     bind                 :{{ haproxy_stats_port }}
     mode                 http
     stats                enable
-    stats                uri /
+    stats                uri /stats
 {% endif %}
 
 {% for frontend in haproxy_frontends %}
