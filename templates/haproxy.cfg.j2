@@ -29,6 +29,13 @@ defaults
     timeout check           10s
     maxconn                 3000
 
+{% if haproxy_stats == true %}
+listen stats :1936
+    mode                 http
+    stats                enable
+    stats                uri /
+{% endif %}
+
 {% for frontend in haproxy_frontends %}
 frontend {{ frontend.name }}
   bind {{ frontend.bind }}
