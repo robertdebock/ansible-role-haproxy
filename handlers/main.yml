@@ -4,3 +4,5 @@
   service:
     name: haproxy
     state: restarted
+  when:
+    - ansible_virtualization_type != "docker"
