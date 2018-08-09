@@ -39,6 +39,6 @@ frontend {{ frontend.name }}
 backend {{ backend.name }}
   balance {{ backend.balance }}
   {% for server in backend.servers %}
-  server {{ server.name }} {{ server.hostname }}:{{ server.port}} {{ server.option }}
+  server {{ server.name }} {{ server.hostname }}:{{ server.port}}{% if server.option is defined %} {{ server.option }}{% endif %}
   {% endfor %}
 {% endfor %}
