@@ -45,8 +45,8 @@ frontend {{ frontend.name }}
 
 {% for backend in haproxy_backends %}
 backend {{ backend.name }}
-{% if backend.balance is defined %}    balance {{ backend.balance }}{% endif %}
+    balance {{ backend.balance | default('roundrobin') }}
   {% for server in backend.servers %}
-    server {{ server.name }} {{ server.hostname }}:{{ server.port}}{% if server.option is defined %} {{ server.option }}{% endif %}
+    server {{ server.name }} {{ server.hostname }}:{{ server.port }}{{ server.option | default([]) }}
   {% endfor %}
 {% endfor %}
