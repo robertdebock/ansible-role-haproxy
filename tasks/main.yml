@@ -26,7 +26,6 @@
     ports: "{{ haproxy_stats_port }}"
     proto: tcp
     setype: http_port_t
-    state: present
   when:
     - ansible_selinux.status is defined
     - ansible_selinux.status == "enabled"
