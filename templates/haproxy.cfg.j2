@@ -8,7 +8,7 @@ global
     group       haproxy
     daemon
     stats       socket /var/lib/haproxy/stats
-    
+
     ssl-default-bind-ciphers   PROFILE=SYSTEM
     ssl-default-server-ciphers PROFILE=SYSTEM
 
@@ -40,14 +40,14 @@ listen stats
 
 {% for frontend in haproxy_frontends %}
 frontend {{ frontend.name }}
-    bind {{ frontend.address }}:{{ frontend:port }}
+    bind {{ frontend.address }}:{{ frontend.port }}
     default_backend {{ frontend.default_backend }}
 {% endfor %}
 
 {% for backend in haproxy_backends %}
 backend {{ backend.name }}
     balance {{ backend.balance | default('roundrobin') }}
-  {% for server in backend.servers %}
+    {% for server in backend.servers %}
     server {{ server.name }} {{ server.hostname }}:{{ server.port }}{{ server.option | default([]) }}
-  {% endfor %}
+    {% endfor %}
 {% endfor %}
