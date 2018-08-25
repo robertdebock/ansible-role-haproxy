@@ -20,14 +20,49 @@ Access to a repository containing packages, likely on the internet.
 Role Variables
 --------------
 
-None known.
+-   haproxy_stats: If statistics should be enabled. Default: yes
+-   haproxy_stats_port: What TCP port should serve statistics. Default: 1936
+
+The next set of variables are values copy-pasted from haproxy.cfg an can be altered to your preference.
+-   haproxy_retries: Default: 3
+-   haproxy_timeout_http_request: Default: 10s
+-   haproxy_timeout_queue: Default: 1m
+-   haproxy_timeout_connect: Default: 10s
+-   haproxy_timeout_client: Default: 1m
+-   haproxy_timeout_server: Default: 1m
+-   haproxy_timeout_http_keep_alive: Default: 10s
+-   haproxy_timeout_check: Default: 10s
+-   haproxy_maxconn: Default: 3000
+
+-   haproxy_frontends: A list of dictionaries to configure all frontends. Default:
+```
+haproxy_frontends:
+  - name: main
+    address: "*"
+    port: 80
+    default_backend: app
+```
+
+-   haproxy_backends: A list of dictionaries to configure all backends. Default:
+```
+haproxy_backends:
+  - name: app
+    balance: roundrobin
+    servers:
+      - name: app1
+        hostname: 127.0.0.1
+        port: 5001
+        option: check
+```
+
+Note: Front and backends must match, if you refer to a non-existing backend, haproxy will run into troubles.
 
 Dependencies
 ------------
 
 This role can be used to prepare your system:
 
-- [robertdebock.bootstrap](https://travis-ci.org/robertdebock/ansible-role-bootstrap)
+-   [robertdebock.bootstrap](https://travis-ci.org/robertdebock/ansible-role-bootstrap)
 
 Download the dependencies by issuing this command:
 ```
@@ -44,7 +79,7 @@ This role has been tested against the following distributions and Ansible versio
 |alpine-edge|yes|yes|yes|
 |alpine-latest|yes|yes|yes|
 |archlinux|yes|yes|yes|
-|centos-6|no|no|no|
+|centos-6|yes|yes|yes|
 |centos-latest|yes|yes|yes|
 |debian-latest|yes|yes|yes|
 |debian-stable|yes|yes|yes|
@@ -78,4 +113,4 @@ Apache License, Version 2.0
 Author Information
 ------------------
 
-[Robert de Bock](https://robertdebock.nl/) <robert@meinit.nl>
+[Robert de Bock](https://robertdebock.nl/) <mailto:robert@meinit.nl>

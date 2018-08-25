@@ -7,8 +7,9 @@ global
     user        haproxy
     group       haproxy
     daemon
-    stats socket /var/lib/haproxy/stats
-    ssl-default-bind-ciphers PROFILE=SYSTEM
+    stats       socket /var/lib/haproxy/stats
+    
+    ssl-default-bind-ciphers   PROFILE=SYSTEM
     ssl-default-server-ciphers PROFILE=SYSTEM
 
 defaults
@@ -16,18 +17,18 @@ defaults
     log                     global
     option                  httplog
     option                  dontlognull
-    option http-server-close
-    option forwardfor       except 127.0.0.0/8
+    option                  http-server-close
+    option                  forwardfor except 127.0.0.0/8
     option                  redispatch
-    retries                 3
-    timeout http-request    10s
-    timeout queue           1m
-    timeout connect         10s
-    timeout client          1m
-    timeout server          1m
-    timeout http-keep-alive 10s
-    timeout check           10s
-    maxconn                 3000
+    retries                 {{ haproxy_retries }}
+    timeout http-request    {{ haproxy_timeout_http_request }}
+    timeout queue           {{ haproxy_timeout_check }}
+    timeout connect         {{ haproxy_timeout_connect }}
+    timeout client          {{ haproxy_timeout_client }}
+    timeout server          {{ haproxy_timeout_server }}
+    timeout http-keep-alive {{ haproxy_timeout_http_keep_alive }}
+    timeout check           {{ haproxy_timeout_check }}
+    maxconn                 {{ haproxy_maxconn }}
 
 {% if haproxy_stats == true %}
 listen stats
@@ -39,7 +40,7 @@ listen stats
 
 {% for frontend in haproxy_frontends %}
 frontend {{ frontend.name }}
-    bind {{ frontend.bind }}
+    bind {{ frontend.address }}:{{ frontend:port }}
     default_backend {{ frontend.default_backend }}
 {% endfor %}
 

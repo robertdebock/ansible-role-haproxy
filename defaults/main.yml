@@ -3,9 +3,20 @@
 haproxy_stats: yes
 haproxy_stats_port: 1936
 
+haproxy_retries: 3
+haproxy_timeout_http_request: 10s
+haproxy_timeout_queue: 1m
+haproxy_timeout_connect: 10s
+haproxy_timeout_client: 1m
+haproxy_timeout_server: 1m
+haproxy_timeout_http_keep_alive: 10s
+haproxy_timeout_check: 10s
+haproxy_maxconn: 3000
+
 haproxy_frontends:
   - name: main
-    bind: "*:80"
+    address: "*"
+    port: 80
     default_backend: app
 
 haproxy_backends:
