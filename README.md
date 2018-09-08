@@ -48,11 +48,10 @@ haproxy_frontends:
 haproxy_backends:
   - name: app
     balance: roundrobin
-    servers:
-      - name: app1
-        hostname: 127.0.0.1
-        port: 5001
-        option: check
+    servers: "{{ groups['all'] }}"
+    port: 80
+    options:
+      - check
 ```
 
 Note: Front and backends must match, if you refer to a non-existing backend, haproxy will run into troubles.
@@ -101,6 +100,33 @@ The simplest way possible:
   roles:
     - robertdebock.bootstrap
     - robertdebock.haproxy
+```
+
+To use a group in the inventory as the list of servers in the backend:
+
+`inventory`:
+```
+[webservers]
+192.168.0.1
+192.168.0.2
+192.168.0.3
+```
+
+`playbook.yml`:
+```
+- hosts: haproxy
+  become: true
+
+  roles:
+    - robertdebock.bootstrap
+    - robertdebock.haproxy
+      haproxy_backends:
+       - name: app
+         balance: roundrobin
+         servers: "{{ groups['webservers'] }}"
+         port: 80
+         options:
+           - check
 ```
 
 Install this role using `galaxy install robertdebock.haproxy`.

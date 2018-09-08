@@ -22,8 +22,7 @@ haproxy_frontends:
 haproxy_backends:
   - name: app
     balance: roundrobin
-    servers:
-      - name: app1
-        hostname: 127.0.0.1
-        port: 5001
-        option: check
+    servers: "{{ groups['all'] }}"
+    port: 80
+    options:
+      - check
