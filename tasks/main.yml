@@ -18,6 +18,7 @@
   template:
     src: haproxy.cfg.j2
     dest: /etc/haproxy/haproxy.cfg
+    validate: haproxy -c -f %s
   notify:
     - restart software
 
@@ -26,7 +27,9 @@
     ports: "{{ haproxy_stats_port }}"
     proto: tcp
     setype: http_port_t
+    state: present
   when:
+    - haproxy_stats_port is defined
     - ansible_selinux.status is defined
     - ansible_selinux.status == "enabled"
 

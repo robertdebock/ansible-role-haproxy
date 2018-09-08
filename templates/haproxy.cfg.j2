@@ -9,9 +9,6 @@ global
     daemon
     stats       socket /var/lib/haproxy/stats
 
-    ssl-default-bind-ciphers   PROFILE=SYSTEM
-    ssl-default-server-ciphers PROFILE=SYSTEM
-
 defaults
     mode                    http
     log                     global
@@ -42,12 +39,13 @@ listen stats
 frontend {{ frontend.name }}
     bind {{ frontend.address }}:{{ frontend.port }}
     default_backend {{ frontend.default_backend }}
-{% endfor %}
 
+{% endfor %}
 {% for backend in haproxy_backends %}
 backend {{ backend.name }}
     balance {{ backend.balance | default('roundrobin') }}
-    {% for server in backend.servers %}
-    server {{ server.name }} {{ server.hostname }}:{{ server.port }}{{ server.option | default([]) }}
-    {% endfor %}
+{% for server in backend.servers %}
+    server {{ server }} {{ hostvars[server]['ansible_default_ipv4']['address'] }}:{{ backend.port }} {{ backend.options | join(' ') }}
+{% endfor %}
+
 {% endfor %}
