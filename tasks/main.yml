@@ -21,6 +21,8 @@
     validate: haproxy -c -f %s
   notify:
     - restart software
+  when:
+    - ansible_default_ipv4 is defined
 
 - name: add haproxy_stats_port to http_port_t selinux type
   seport:
