@@ -45,7 +45,7 @@ frontend {{ frontend.name }}
 backend {{ backend.name }}
     balance {{ backend.balance | default('roundrobin') }}
 {% for server in backend.servers %}
-    server {{ server }} {{ hostvars[server]['ansible_default_ipv4']['address'] }}:{{ backend.port }} {{ backend.options | join(' ') }}
+    server {{ server }} {{ hostvars[server]['ansible_default_ipv4']['address'] | default(server) }}:{{ backend.port }} {{ backend.options | join(' ') }}
 {% endfor %}
 
 {% endfor %}
