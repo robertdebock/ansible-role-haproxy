@@ -13,6 +13,7 @@
 - name: install software
   package:
     name: haproxy
+    state: present
 
 - name: configure software
   template:
