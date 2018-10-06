@@ -1,0 +1,50 @@
+---
+dependency:
+  name: galaxy
+  options:
+    role-file: requirements.yml
+driver:
+  name: docker
+lint:
+  name: yamllint
+platforms:
+  - name: haproxy-alpine-edge
+    image: alpine:edge
+    command: sh -c "while true ; do sleep 1 ; done"
+  - name: haproxy-alpine-latest
+    image: alpine:latest
+    command: sh -c "while true ; do sleep 1 ; done"
+  - name: haproxy-archlinux
+    image: base/archlinux
+  - name: haproxy-centos-6
+    image: centos:6
+  - name: haproxy-centos-latest
+    image: centos:latest
+  - name: haproxy-debian-latest
+    image: debian:latest
+  - name: haproxy-debian-stable
+    image: debian:stable
+  - name: haproxy-debian-unstable
+    image: debian:unstable
+  - name: haproxy-fedora-latest
+    image: fedora:latest
+  - name: haproxy-fedora-rawhide
+    image: fedora:rawhide
+  - name: haproxy-opensuse-leap
+    image: opensuse:leap
+  - name: haproxy-opensuse-tumbleweed
+    image: opensuse:tumbleweed
+  - name: haproxy-ubuntu-artful
+    image: ubuntu:artful
+  - name: haproxy-ubuntu-devel
+    image: ubuntu:devel
+provisioner:
+  name: ansible
+  lint:
+    name: ansible-lint
+scenario:
+  name: default
+verifier:
+  name: goss
+  lint:
+    name: yamllint
