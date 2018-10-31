@@ -3,59 +3,58 @@ haproxy
 
 [![Build Status](https://travis-ci.org/robertdebock/ansible-role-haproxy.svg?branch=master)](https://travis-ci.org/robertdebock/ansible-role-haproxy)
 
-The Reliable, High Performance TCP/HTTP Load Balancer
+Install HAProxy, the Reliable, High Performance TCP/HTTP Load Balancer
 
-[Unit tests](https://travis-ci.org/robertdebock/ansible-role-haproxy) are done on every commit and periodically.
 
-If you find issues, please register them in [GitHub](https://github.com/robertdebock/ansible-role-haproxy/issues)
+Example Playbook
+----------------
 
-To test this role locally please use [Molecule](https://github.com/metacloud/molecule):
+This example is taken from `molecule/default/playbook.yml`:
 ```
-pip install molecule
-molecule test
+---
+- name: Converge
+  hosts: all
+  become: true
+  gather_facts: false
+
+  roles:
+    - robertdebock.bootstrap
+    - robertdebock.haproxy
+
 ```
-There are many scenarios available, please have a look in the `molecule/` directory.
-
-Context
--------
-This role is a part of many compatible roles. Have a look at [the documentation of these roles](https://robertdebock.nl/) for further information.
-
-Here is an overview of related roles:
-![dependencies](https://raw.githubusercontent.com/robertdebock/drawings/artifacts/haproxy.png "Dependency")
-
-Requirements
-------------
-
-Access to a repository containing packages, likely on the internet.
 
 Role Variables
 --------------
 
--   haproxy_stats: If statistics should be enabled. Default: yes
--   haproxy_stats_port: What TCP port should serve statistics. Default: 1936
-
-The next set of variables are values copy-pasted from haproxy.cfg an can be altered to your preference.
--   haproxy_retries: Default: 3
--   haproxy_timeout_http_request: Default: 10s
--   haproxy_timeout_queue: Default: 1m
--   haproxy_timeout_connect: Default: 10s
--   haproxy_timeout_client: Default: 1m
--   haproxy_timeout_server: Default: 1m
--   haproxy_timeout_http_keep_alive: Default: 10s
--   haproxy_timeout_check: Default: 10s
--   haproxy_maxconn: Default: 3000
-
--   haproxy_frontends: A list of dictionaries to configure all frontends. Default:
+These variables are set in `defaults/main.yml`:
 ```
+---
+# defaults file for haproxy
+
+# Configure stats in HAProxy?
+haproxy_stats: yes
+haproxy_stats_port: 1936
+
+# Default setttings for HAProxy.
+haproxy_retries: 3
+haproxy_timeout_http_request: 10s
+haproxy_timeout_queue: 1m
+haproxy_timeout_connect: 10s
+haproxy_timeout_client: 1m
+haproxy_timeout_server: 1m
+haproxy_timeout_http_keep_alive: 10s
+haproxy_timeout_check: 10s
+haproxy_maxconn: 3000
+
+# A list of frontends and their properties.
 haproxy_frontends:
   - name: main
     address: "*"
     port: 80
     default_backend: app
-```
 
--   haproxy_backends: A list of dictionaries to configure all backends. Default:
-```
+# A list of backends and their properties.
+haproxy_frontends:
 haproxy_backends:
   - name: app
     balance: roundrobin
@@ -63,21 +62,32 @@ haproxy_backends:
     port: 80
     options:
       - check
+
+# To update all packages installed by this roles, set `haproxy_package_state` to `latest`.
+haproxy_package_state: present
+
 ```
 
-Note: Front and backends must match, if you refer to a non-existing backend, haproxy will run into troubles.
-
-Dependencies
+Requirements
 ------------
 
-This role can be used to prepare your system:
+- Access to a repository containing packages, likely on the internet.
+- A recent version of Ansible. (Tests run on the last 3 release of Ansible.)
 
--   [robertdebock.bootstrap](https://travis-ci.org/robertdebock/ansible-role-bootstrap)
+The following roles can be installed to ensure all requirements are met, using `ansible-galaxy install -r requirements.yml`:
 
-Download the dependencies by issuing this command:
-```
-ansible-galaxy install --role-file requirements.yml
-```
+---
+- robertdebock.bootstrap
+
+
+Context
+-------
+
+This role is a part of many compatible roles. Have a look at [the documentation of these roles](https://robertdebock.nl/) for further information.
+
+Here is an overview of related roles:
+![dependencies](https://raw.githubusercontent.com/robertdebock/drawings/artifacts/haproxy.png "Dependency")
+
 
 Compatibility
 -------------
@@ -104,54 +114,28 @@ This role has been tested against the following distributions and Ansible versio
 
 A single star means the build may fail, it's marked as an experimental build.
 
-Example Playbook
-----------------
+Testing
+-------
 
-The simplest way possible:
+[Unit tests](https://travis-ci.org/robertdebock/ansible-role-haproxy) are done on every commit and periodically.
+
+If you find issues, please register them in [GitHub](https://github.com/robertdebock/ansible-role-haproxy/issues)
+
+To test this role locally please use [Molecule](https://github.com/metacloud/molecule):
 ```
-- hosts: servers
-  become: true
-
-  roles:
-    - robertdebock.bootstrap
-    - robertdebock.haproxy
+pip install molecule
+molecule test
 ```
+There are many specific scenarios available, please have a look in the `molecule/` directory.
 
-To use a group in the inventory as the list of servers in the backend:
-
-`inventory`:
-```
-[webservers]
-192.168.0.1
-192.168.0.2
-192.168.0.3
-```
-
-`playbook.yml`:
-```
-- hosts: haproxy
-  become: true
-
-  roles:
-    - robertdebock.bootstrap
-    - robertdebock.haproxy
-      haproxy_backends:
-       - name: app
-         balance: roundrobin
-         servers: "{{ groups['webservers'] }}"
-         port: 80
-         options:
-           - check
-```
-
-Install this role using `galaxy install robertdebock.haproxy`.
 
 License
 -------
 
-Apache License, Version 2.0
+Apache-2.0
+
 
 Author Information
 ------------------
 
-[Robert de Bock](https://robertdebock.nl/) <mailto:robert@meinit.nl>
+[Robert de Bock](https://robertdebock.nl/) <robert@meinit.nl>

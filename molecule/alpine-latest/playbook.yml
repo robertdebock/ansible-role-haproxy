@@ -5,5 +5,5 @@
   gather_facts: false
 
   roles:
-    - role: robertdebock.bootstrap
-    - role: ansible-role-haproxy
+    - robertdebock.bootstrap
+    - ansible-role-haproxy

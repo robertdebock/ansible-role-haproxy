@@ -1,8 +1,11 @@
 ---
 # defaults file for haproxy
+
+# Configure stats in HAProxy?
 haproxy_stats: yes
 haproxy_stats_port: 1936
 
+# Default setttings for HAProxy.
 haproxy_retries: 3
 haproxy_timeout_http_request: 10s
 haproxy_timeout_queue: 1m
@@ -13,12 +16,14 @@ haproxy_timeout_http_keep_alive: 10s
 haproxy_timeout_check: 10s
 haproxy_maxconn: 3000
 
+# A list of frontends and their properties.
 haproxy_frontends:
   - name: main
     address: "*"
     port: 80
     default_backend: app
 
+# A list of backends and their properties.
 haproxy_backends:
   - name: app
     balance: roundrobin
