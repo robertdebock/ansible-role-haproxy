@@ -1,1 +1,0 @@
-Install HAProxy, the Reliable, High Performance TCP/HTTP Load Balancer

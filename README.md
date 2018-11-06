@@ -3,8 +3,7 @@ haproxy
 
 [![Build Status](https://travis-ci.org/robertdebock/ansible-role-haproxy.svg?branch=master)](https://travis-ci.org/robertdebock/ansible-role-haproxy)
 
-Install HAProxy, the Reliable, High Performance TCP/HTTP Load Balancer
-
+The purpose of this role is to install and configure haproxy on your system.
 
 Example Playbook
 ----------------
@@ -54,7 +53,6 @@ haproxy_frontends:
     default_backend: app
 
 # A list of backends and their properties.
-haproxy_frontends:
 haproxy_backends:
   - name: app
     balance: roundrobin

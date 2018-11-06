@@ -2,7 +2,7 @@
 galaxy_info:
   author: Robert de Bock
   role_name: haproxy
-  description: The Reliable, High Performance TCP/HTTP Load Balancer.
+  description: The purpose of this role is to install and configure haproxy on your system.
   license: Apache-2.0
   company: none
   min_ansible_version: 2.4
