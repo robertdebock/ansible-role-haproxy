@@ -38,6 +38,8 @@ platforms:
     image: ubuntu:artful
   - name: haproxy-ubuntu-devel
     image: ubuntu:devel
+  - name: haproxy-ubuntu-latest
+    image: ubuntu:latest
 provisioner:
   name: ansible
   lint:
