@@ -4,6 +4,9 @@
   package:
     name: haproxy
     state: "{{ haproxy_package_state }}"
+  register: haproxy_install_haproxy
+  until: haproxy_install_haproxy is succeeded
+  retries: 3
 
 - name: configure software
   template:
