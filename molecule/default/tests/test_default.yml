@@ -1,7 +1,8 @@
 # Molecule managed
 ---
-file:
-  /usr/bin/python:
+user:
+  haproxy:
     exists: true
-    owner: root
-    group: root
+group:
+  haproxy:
+    exists: true

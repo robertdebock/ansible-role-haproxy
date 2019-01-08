@@ -8,6 +8,18 @@
   until: haproxy_install_haproxy is succeeded
   retries: 3
 
+- name: create group
+  group:
+    name: haproxy
+    system: yes
+    state: present
+
+- name: create user
+  user:
+    name: haproxy
+    system: yes
+    state: present
+
 - name: configure software
   template:
     src: haproxy.cfg.j2

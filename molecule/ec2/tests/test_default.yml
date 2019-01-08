@@ -1,8 +1,8 @@
 # Molecule managed
-
 ---
-file:
-  /etc/hosts:
+user:
+  haproxy:
     exists: true
-    owner: root
-    group: root
+group:
+  haproxy:
+    exists: true
