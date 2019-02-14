@@ -34,8 +34,10 @@ platforms:
     image: opensuse:leap
   - name: haproxy-opensuse-tumbleweed
     image: opensuse:tumbleweed
-  - name: haproxy-ubuntu-artful
-    image: ubuntu:artful
+  - name: haproxy-ubuntu-latest
+    image: ubuntu:latest
+  - name: haproxy-ubuntu-rolling
+    image: ubuntu:rolling
   - name: haproxy-ubuntu-devel
     image: ubuntu:devel
   - name: haproxy-ubuntu-latest
