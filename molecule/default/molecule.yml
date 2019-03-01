@@ -32,8 +32,6 @@ platforms:
     image: fedora:rawhide
   - name: haproxy-opensuse-leap
     image: opensuse:leap
-  - name: haproxy-opensuse-tumbleweed
-    image: opensuse:tumbleweed
   - name: haproxy-ubuntu-latest
     image: ubuntu:latest
   - name: haproxy-ubuntu-rolling
