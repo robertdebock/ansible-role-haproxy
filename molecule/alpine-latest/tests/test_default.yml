@@ -1,8 +1,0 @@
-# Molecule managed
----
-user:
-  haproxy:
-    exists: true
-group:
-  haproxy:
-    exists: true
