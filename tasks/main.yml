@@ -3,7 +3,7 @@
 - name: install haproxy
   package:
     name: haproxy
-    state: "{{ haproxy_package_state }}"
+    state: present
   register: haproxy_install_haproxy
   until: haproxy_install_haproxy is succeeded
   retries: 3

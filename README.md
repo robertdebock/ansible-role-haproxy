@@ -61,9 +61,6 @@ haproxy_backends:
     port: 80
     options:
       - check
-
-# To update all packages installed by this roles, set `haproxy_package_state` to `latest`.
-haproxy_package_state: present
 ```
 
 Requirements
