@@ -5,4 +5,4 @@
     name: haproxy
     state: restarted
   when:
-    - ansible_virtualization_type != "docker" or haproxy_ignore_docker
+    - ansible_virtualization_type != "docker"
