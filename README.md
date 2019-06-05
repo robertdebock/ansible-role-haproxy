@@ -1,14 +1,15 @@
 haproxy
 =========
 
-[![Build Status](https://travis-ci.org/robertdebock/ansible-role-haproxy.svg?branch=master)](https://travis-ci.org/robertdebock/ansible-role-haproxy)
+<img src="https://docs.ansible.com/ansible-tower/3.2.4/html_ja/installandreference/_static/images/logo_invert.png" width="10%" height="10%" alt="Ansible logo" align="left"/>
+<a href="https://travis-ci.org/robertdebock/ansible-role-haproxy"><img src="https://travis-ci.org/robertdebock/ansible-role-haproxy.svg?branch=master" alt="Build status" align="left"/></a>
 
 Install and configure haproxy on your system.
 
 Example Playbook
 ----------------
 
-This example is taken from `molecule/default/playbook.yml`:
+This example is taken from `molecule/resources/playbook.yml`:
 ```yaml
 ---
 - name: Converge
@@ -20,7 +21,7 @@ This example is taken from `molecule/default/playbook.yml`:
     - robertdebock.haproxy
 ```
 
-The machine you are running this on, may need to be prepared. Tests have been done on machines prepared by this playbook:
+The machine you are running this on, may need to be prepared.
 ```yaml
 ---
 - name: Prepare
@@ -102,7 +103,7 @@ Compatibility
 
 This role has been tested against the following distributions and Ansible version:
 
-|distribution|ansible 2.6|ansible 2.7|ansible devel|
+|distribution|ansible 2.7|ansible 2.8|ansible devel|
 |------------|-----------|-----------|-------------|
 |alpine-edge*|yes|yes|yes*|
 |alpine-latest|yes|yes|yes*|
@@ -128,7 +129,7 @@ Testing
 
 If you find issues, please register them in [GitHub](https://github.com/robertdebock/ansible-role-haproxy/issues)
 
-To test this role locally please use [Molecule](https://github.com/metacloud/molecule):
+To test this role locally please use [Molecule](https://github.com/ansible/molecule):
 ```
 pip install molecule
 molecule test
@@ -157,4 +158,4 @@ Apache-2.0
 Author Information
 ------------------
 
-[Robert de Bock](https://robertdebock.nl/) <robert@meinit.nl>
+Robert de Bock
