@@ -6,8 +6,8 @@ haproxy
 
 Install and configure haproxy on your system.
 
-<img src="https://img.shields.io/ansible/role/d/"/>
-<img src="https://img.shields.io/ansible/quality/"/>
+<img src="https://img.shields.io/ansible/role/d/28674"/>
+<img src="https://img.shields.io/ansible/quality/28674"/>
 
 Example Playbook
 ----------------
