@@ -11,7 +11,6 @@ env:
   global:
     namespace="robertdebock"
   matrix:
-    - image="amazonlinux" tag="1"
     - image="amazonlinux"
     - image="alpine"
     - image="alpine" tag="edge"
@@ -30,8 +29,6 @@ matrix:
     - env: image="alpine" tag="edge"
     - env: image="debian" tag="unstable"
     - env: image="fedora" tag="rawhide"
-    - env: image="ubuntu" tag="rolling"
-    - env: image="ubuntu" tag="devel"
 
 cache:
   - pip
