@@ -36,7 +36,6 @@ galaxy_info:
         - bionic
 
   galaxy_tags:
-    - alpine
     - archlinux
     - centos
     - cloud
