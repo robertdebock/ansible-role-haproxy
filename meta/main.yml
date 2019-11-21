@@ -41,6 +41,5 @@ galaxy_info:
     - cloud
     - haproxy
     - rhel
-    - ubuntu
 
 dependencies: []
