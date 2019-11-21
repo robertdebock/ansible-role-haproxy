@@ -40,7 +40,6 @@ galaxy_info:
     - centos
     - cloud
     - haproxy
-    - opensuse
     - rhel
     - ubuntu
 
