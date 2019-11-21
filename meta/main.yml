@@ -39,7 +39,6 @@ galaxy_info:
     - archlinux
     - centos
     - cloud
-    - fedora
     - haproxy
     - opensuse
     - rhel
