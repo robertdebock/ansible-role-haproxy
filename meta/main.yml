@@ -40,6 +40,6 @@ galaxy_info:
     - centos
     - cloud
     - haproxy
-    - rhel
+    - redhat
 
 dependencies: []
