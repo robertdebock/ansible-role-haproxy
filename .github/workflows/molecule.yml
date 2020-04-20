@@ -11,7 +11,7 @@ on:
       - '*'
   pull_request:
   schedule:
-    - cron: '34 2 8 * *'
+    - cron: '12 18 8 * *'
 
 jobs:
   lint:
@@ -20,7 +20,7 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
       - name: molecule
-        uses: robertdebock/molecule-action@2.0.0
+        uses: robertdebock/molecule-action@2.0.1
         with:
           entrypoint: /usr/local/bin/molecule
           args: lint
@@ -32,14 +32,14 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - image: "amazonlinux"
-            tag: "latest"
           - image: "alpine"
             tag: "latest"
           - image: "alpine"
             tag: "edge"
           - image: "debian"
             tag: "latest"
+          - image: "debian"
+            tag: "bullseye"
           - image: "centos"
             tag: "7"
           - image: "centos"
@@ -64,7 +64,7 @@ jobs:
       - name: parse apparmor for mysql
         run: sudo apparmor_parser -R /etc/apparmor.d/usr.sbin.mysqld
       - name: molecule
-        uses: robertdebock/molecule-action@2.0.0
+        uses: robertdebock/molecule-action@2.0.1
         with:
           image: ${{ matrix.config.image }}
           tag: ${{ matrix.config.tag }}
