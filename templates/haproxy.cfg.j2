@@ -37,7 +37,8 @@ listen stats
 
 {% for frontend in haproxy_frontends %}
 frontend {{ frontend.name }}
-    bind {{ frontend.address }}:{{ frontend.port }}
+    bind {{ frontend.address }}:{{ frontend.port }}{% if frontend.ssl is defined and frontend.ssl == true %} ssl{% endif %}{% if frontend.crts is defined and frontend.crts | length >0 %}{% for crt in frontend.crts %} crt {{ crt }}{% endfor %}{% endif %}
+
     default_backend {{ frontend.default_backend }}
 
 {% endfor %}

@@ -18,16 +18,29 @@ haproxy_maxconn: 3000
 
 # A list of frontends and their properties.
 haproxy_frontends:
-  - name: main
+  - name: http
     address: "*"
     port: 80
-    default_backend: app
+    default_backend: http
+  - name: https
+    address: "*"
+    port: 443
+    default_backend: https
 
 # A list of backends and their properties.
 haproxy_backends:
-  - name: app
+  - name: http
     balance: roundrobin
     servers: "{{ groups['all'] }}"
     port: 80
     options:
       - check
+  - name: https
+    balance: roundrobin
+    servers: "{{ groups['all'] }}"
+    port: 443
+    options:
+      - check
+    ssl: yes
+    crts:
+      - my.crt
