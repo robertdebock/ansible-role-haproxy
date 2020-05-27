@@ -7,3 +7,20 @@
   tasks:
     - name: check if connection still works
       ping:
+
+    - name: check if ports responds
+      wait_for:
+        port: "{{ item }}"
+      loop:
+        - 80
+        - 443
+
+    - name: check of content can be retrieved
+      uri:
+        url: "{{ item }}"
+        validate_certs: no
+        status_code:
+          - 403
+      loop:
+        - "http://localhost/"
+        - "https://localhost/"

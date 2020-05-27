@@ -21,26 +21,21 @@ haproxy_frontends:
   - name: http
     address: "*"
     port: 80
-    default_backend: http
+    default_backend: backend
   - name: https
     address: "*"
     port: 443
-    default_backend: https
-
-# A list of backends and their properties.
-haproxy_backends:
-  - name: http
-    balance: roundrobin
-    servers: "{{ groups['all'] }}"
-    port: 80
-    options:
-      - check
-  - name: https
-    balance: roundrobin
-    servers: "{{ groups['all'] }}"
-    port: 443
-    options:
-      - check
-    ssl: yes
+    default_backend: backend
+    ssl: true
     crts:
-      - my.crt
+      - /etc/pki/tls/private/my.keycrt
+
+haproxy_backends:
+  - name: backend
+    balance: roundrobin
+    servers: "{{ groups['all'] }}"
+    port: 8443
+    options:
+      - check
+      - ssl
+      - verify none

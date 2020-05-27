@@ -7,3 +7,14 @@
   roles:
     - role: robertdebock.bootstrap
     - role: robertdebock.core_dependencies
+    - role: robertdebock.epel
+    - role: robertdebock.buildtools
+    - role: robertdebock.python_pip
+    - role: robertdebock.openssl
+      openssl_items:
+        - name: my
+          common_name: "{{ ansible_fqdn }}"
+    # This role is applied to serve as a "backend" server. See `molecule/default/verify.yml`.
+    - role: robertdebock.httpd
+      httpd_port: 8080
+      httpd_ssl_port: 8443

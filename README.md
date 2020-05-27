@@ -31,6 +31,17 @@ The machine may need to be prepared using `molecule/resources/prepare.yml`:
   roles:
     - role: robertdebock.bootstrap
     - role: robertdebock.core_dependencies
+    - role: robertdebock.epel
+    - role: robertdebock.buildtools
+    - role: robertdebock.python_pip
+    - role: robertdebock.openssl
+      openssl_items:
+        - name: my
+          common_name: "{{ ansible_fqdn }}"
+    # This role is applied to serve as a "backend" server. See `molecule/default/verify.yml`.
+    - role: robertdebock.httpd
+      httpd_port: 8080
+      httpd_ssl_port: 8443
 ```
 
 For verification `molecule/resources/verify.yml` run after the role has been applied.
@@ -44,6 +55,23 @@ For verification `molecule/resources/verify.yml` run after the role has been app
   tasks:
     - name: check if connection still works
       ping:
+
+    - name: check if ports responds
+      wait_for:
+        port: "{{ item }}"
+      loop:
+        - 80
+        - 443
+
+    - name: check of content can be retrieved
+      uri:
+        url: "{{ item }}"
+        validate_certs: no
+        status_code:
+          - 403
+      loop:
+        - "http://localhost/"
+        - "https://localhost/"
 ```
 
 Also see a [full explanation and example](https://robertdebock.nl/how-to-use-these-roles.html) on how to use these roles.
@@ -75,29 +103,24 @@ haproxy_frontends:
   - name: http
     address: "*"
     port: 80
-    default_backend: http
+    default_backend: backend
   - name: https
     address: "*"
     port: 443
-    default_backend: https
-
-# A list of backends and their properties.
-haproxy_backends:
-  - name: http
-    balance: roundrobin
-    servers: "{{ groups['all'] }}"
-    port: 80
-    options:
-      - check
-  - name: https
-    balance: roundrobin
-    servers: "{{ groups['all'] }}"
-    port: 443
-    options:
-      - check
-    ssl: yes
+    default_backend: backend
+    ssl: true
     crts:
-      - my.crt
+      - /etc/pki/tls/private/my.keycrt
+
+haproxy_backends:
+  - name: backend
+    balance: roundrobin
+    servers: "{{ groups['all'] }}"
+    port: 8443
+    options:
+      - check
+      - ssl
+      - verify none
 ```
 
 ## Requirements
@@ -111,6 +134,12 @@ The following roles can be installed to ensure all requirements are met, using `
 ---
 - robertdebock.bootstrap
 - robertdebock.core_dependencies
+- robertdebock.buildtools
+- robertdebock.epel
+# httpd is added to test the connection. (see `molecule/default/verify.yml`)
+- robertdebock.httpd
+- robertdebock.python_pip
+- robertdebock.openssl
 
 ```
 
@@ -123,7 +152,7 @@ Here is an overview of related roles:
 
 ## Compatibility
 
-This role has been tested on these [container images](https://hub.docker.com/):
+This role has been tested on these [container images](https://hub.docker.com/u/robertdebock):
 
 |container|tags|
 |---------|----|
