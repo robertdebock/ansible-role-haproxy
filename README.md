@@ -35,6 +35,7 @@ The machine may need to be prepared using `molecule/resources/prepare.yml`:
     - role: robertdebock.buildtools
     - role: robertdebock.python_pip
     - role: robertdebock.openssl
+      openssl_key_directory: /tmp
       openssl_items:
         - name: my
           common_name: "{{ ansible_fqdn }}"
@@ -68,6 +69,7 @@ For verification `molecule/resources/verify.yml` run after the role has been app
         url: "{{ item }}"
         validate_certs: no
         status_code:
+          - 200
           - 403
       loop:
         - "http://localhost/"
@@ -110,7 +112,7 @@ haproxy_frontends:
     default_backend: backend
     ssl: true
     crts:
-      - /etc/pki/tls/private/my.keycrt
+      - /tmp/my.keycrt
 
 haproxy_backends:
   - name: backend
@@ -160,7 +162,6 @@ This role has been tested on these [container images](https://hub.docker.com/u/r
 |el|7, 8|
 |debian|buster, bullseye|
 |fedora|31, 32|
-|opensuse|all|
 |ubuntu|focal, bionic, xenial|
 
 The minimum version of Ansible required is 2.8 but tests have been done to:
