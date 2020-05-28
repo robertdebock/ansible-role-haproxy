@@ -11,6 +11,7 @@
     - role: robertdebock.buildtools
     - role: robertdebock.python_pip
     - role: robertdebock.openssl
+      openssl_key_directory: /tmp
       openssl_items:
         - name: my
           common_name: "{{ ansible_fqdn }}"
