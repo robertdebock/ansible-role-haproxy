@@ -37,9 +37,13 @@ The machine may need to be prepared using `molecule/resources/prepare.yml`:
     - role: robertdebock.openssl
       openssl_key_directory: /tmp
       openssl_items:
-        - name: my
+        - name: haproxy
           common_name: "{{ ansible_fqdn }}"
-    # This role is applied to serve as a "backend" server. See `molecule/default/verify.yml`.
+    - role: robertdebock.openssl
+      openssl_items:
+        - name: apache-httpd
+          common_name: "{{ ansible_fqdn }}"
+    # This role is applied to serve as a mock "backend" server. See `molecule/default/verify.yml`.
     - role: robertdebock.httpd
       httpd_port: 8080
       httpd_ssl_port: 8443
@@ -112,7 +116,7 @@ haproxy_frontends:
     default_backend: backend
     ssl: true
     crts:
-      - /tmp/my.keycrt
+      - /tmp/haproxy.keycrt
 
 haproxy_backends:
   - name: backend
@@ -159,9 +163,10 @@ This role has been tested on these [container images](https://hub.docker.com/u/r
 |container|tags|
 |---------|----|
 |alpine|all|
-|el|7, 8|
+|el|7|
 |debian|buster, bullseye|
 |fedora|31, 32|
+|opensuse|all|
 |ubuntu|focal, bionic, xenial|
 
 The minimum version of Ansible required is 2.8 but tests have been done to:

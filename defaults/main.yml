@@ -28,7 +28,7 @@ haproxy_frontends:
     default_backend: backend
     ssl: true
     crts:
-      - /tmp/my.keycrt
+      - /tmp/haproxy.keycrt
 
 haproxy_backends:
   - name: backend
