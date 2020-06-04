@@ -2,9 +2,9 @@
 
 Install and configure haproxy on your system.
 
-|Travis|GitHub|Quality|Downloads|
-|------|------|-------|---------|
-|[![travis](https://travis-ci.com/robertdebock/ansible-role-haproxy.svg?branch=master)](https://travis-ci.com/robertdebock/ansible-role-haproxy)|[![github](https://github.com/robertdebock/ansible-role-haproxy/workflows/Ansible%20Molecule/badge.svg)](https://github.com/robertdebock/ansible-role-haproxy/actions)|[![quality](https://img.shields.io/ansible/quality/28674)](https://galaxy.ansible.com/robertdebock/haproxy)|[![downloads](https://img.shields.io/ansible/role/d/28674)](https://galaxy.ansible.com/robertdebock/haproxy)|
+|Travis|GitHub|Quality|Downloads|Version|
+|------|------|-------|---------|-------|
+|[![travis](https://travis-ci.com/robertdebock/ansible-role-haproxy.svg?branch=master)](https://travis-ci.com/robertdebock/ansible-role-haproxy)|[![github](https://github.com/robertdebock/ansible-role-haproxy/workflows/Ansible%20Molecule/badge.svg)](https://github.com/robertdebock/ansible-role-haproxy/actions)|[![quality](https://img.shields.io/ansible/quality/28674)](https://galaxy.ansible.com/robertdebock/haproxy)|[![downloads](https://img.shields.io/ansible/role/d/28674)](https://galaxy.ansible.com/robertdebock/haproxy)|[![Version](https://img.shields.io/github/release/robertdebock/ansible-role-haproxy.svg)](https://github.com/robertdebock/ansible-role-haproxy/releases/)|
 
 ## [Example Playbook](#example-playbook)
 
@@ -138,14 +138,14 @@ The following roles can be installed to ensure all requirements are met, using `
 
 ```yaml
 ---
-- robertdebock.bootstrap
-- robertdebock.core_dependencies
-- robertdebock.buildtools
-- robertdebock.epel
 # httpd is added to test the connection. (see `molecule/default/verify.yml`)
+- robertdebock.bootstrap
+- robertdebock.buildtools
+- robertdebock.core_dependencies
+- robertdebock.epel
 - robertdebock.httpd
-- robertdebock.python_pip
 - robertdebock.openssl
+- robertdebock.python_pip
 
 ```
 
