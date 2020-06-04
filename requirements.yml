@@ -1,9 +1,9 @@
 ---
-- robertdebock.bootstrap
-- robertdebock.core_dependencies
-- robertdebock.buildtools
-- robertdebock.epel
 # httpd is added to test the connection. (see `molecule/default/verify.yml`)
+- robertdebock.bootstrap
+- robertdebock.buildtools
+- robertdebock.core_dependencies
+- robertdebock.epel
 - robertdebock.httpd
-- robertdebock.python_pip
 - robertdebock.openssl
+- robertdebock.python_pip
