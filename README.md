@@ -114,7 +114,7 @@ haproxy_frontends:
     address: "*"
     port: 443
     default_backend: backend
-    ssl: true
+    ssl: yes
     crts:
       - /tmp/haproxy.keycrt
 
