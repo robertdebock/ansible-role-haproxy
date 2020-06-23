@@ -44,7 +44,7 @@ frontend {{ frontend.name }}
 {% endfor %}
 {% for backend in haproxy_backends %}
 backend {{ backend.name }}
-    balance {{ backend.balance | default('roundrobin') }}
+    balance {{ backend.balance | default(haproxy_backend_default_balance) }}
 {% for server in backend.servers %}
     server {{ server }} {{ hostvars[server]['ansible_default_ipv4']['address'] }}:{{ backend.port }} {{ backend.options | join(' ') }}
 {% endfor %}

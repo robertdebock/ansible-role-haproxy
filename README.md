@@ -118,6 +118,8 @@ haproxy_frontends:
     crts:
       - /tmp/haproxy.keycrt
 
+haproxy_backend_default_balance: roundrobin
+
 haproxy_backends:
   - name: backend
     balance: roundrobin
