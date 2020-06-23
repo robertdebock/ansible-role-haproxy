@@ -1,5 +1,8 @@
 ---
 # tasks file for haproxy
+- name: include assert.yml
+  include_tasks: assert.yml
+
 - name: install haproxy
   package:
     name: haproxy

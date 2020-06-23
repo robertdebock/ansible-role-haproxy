@@ -1,0 +1,106 @@
+---
+- name: test if haproxy_stats is set correctly
+  assert:
+    that:
+      - haproxy_stats is defined
+      - haproxy_stats | type_debug == "bool"
+
+- name: test if haproxy_stats_port is set correctly
+  assert:
+    that:
+      - haproxy_stats_port is defined
+      - haproxy_stats_port | int
+      - haproxy_stats_port | int > 0
+      - haproxy_stats_port | int < 65536
+
+- name: test if haproxy_retries is set correctly
+  assert:
+    that:
+      - haproxy_retries is defined
+      - haproxy_retries | int
+      - haproxy_retries | int >= 0
+
+- name: test if {{ item }} is set correctly
+  assert:
+    that:
+      - item is defined
+      - item | length > 0
+  loop:
+    - "{{ haproxy_timeout_http_request }}"
+    - "{{ haproxy_timeout_queue }}"
+    - "{{ haproxy_timeout_connect }}"
+    - "{{ haproxy_timeout_client }}"
+    - "{{ haproxy_timeout_server }}"
+    - "{{ haproxy_timeout_http_keep_alive }}"
+    - "{{ haproxy_timeout_check }}"
+
+- name: test if haproxy_maxconn is set correctly
+  assert:
+    that:
+      - haproxy_maxconn is defined
+      - haproxy_maxconn | int
+      - haproxy_maxconn | int > 0
+
+- name: test if haproxy_frontends is set correctly
+  assert:
+    that:
+      - haproxy_frontends is defined
+      - haproxy_frontends | length > 0
+      - haproxy_frontends is iterable
+
+- name: test if item in haproxy_frontends is set correctly
+  assert:
+    that:
+      - item.name is defined
+      - item.name | length > 0
+      - item.address is defined
+      - item.address | length > 0
+      - item.port is defined
+      - item.port | int
+      - item.port | int > 0
+      - item.port | int < 65536
+      - item.default_backend is defined
+      - item.default_backend | length > 0
+  loop: "{{ haproxy_frontends }}"
+
+- name: test if item in haproxy_frontends with ssl is set correctly
+  assert:
+    that:
+      - item.ssl | type_debug == "bool"
+      - item.crts is defined
+      - item.crts | length > 0
+      - item.crts is iterable
+  loop: "{{ haproxy_frontends }}"
+  when:
+    - item.ssl is defined
+
+- name: test if haproxy_backends is set correctly
+  assert:
+    that:
+      - haproxy_backends is defined
+      - haproxy_backends | length > 0
+      - haproxy_backends is iterable
+
+- name: test if haproxy_backend_default_balance is set correctly
+  assert:
+    that:
+      - haproxy_backend_default_balance is defined
+      - haproxy_backend_default_balance | length > 0
+      - haproxy_backend_default_balance in ["roundrobin", "static-rr", "leastconn", "first", "source", "uri", "url_param", "hdr", "rdp-cookie"]
+
+- name: test if item in haproxy_backends is set correctly
+  assert:
+    that:
+      - item.name is defined
+      - item.name | length > 0
+      - (item.balance is defined and item.balance in ["roundrobin", "static-rr", "leastconn", "first", "source", "uri", "url_param", "hdr", "rdp-cookie"]) or item.balance is not defined
+      - item.balance in ["roundrobin", "static-rr", "leastconn", "first", "source", "uri", "url_param", "hdr", "rdp-cookie"]
+      - item.servers is defined
+      - item.servers | length > 0
+      - item.servers is iterable
+      - item.port is defined
+      - item.port | int
+      - item.port | int > 0
+      - item.port | int < 65536
+      - (item.options is defined and item.options | length > 0 and item.options is iterable) or item.options is not defined
+  loop: "{{ haproxy_backends }}"
