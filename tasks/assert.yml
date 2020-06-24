@@ -93,7 +93,9 @@
     that:
       - item.name is defined
       - item.name | length > 0
-      - (item.balance is defined and item.balance in ["roundrobin", "static-rr", "leastconn", "first", "source", "uri", "url_param", "hdr", "rdp-cookie"]) or item.balance is not defined
+      - (item.balance is defined
+        and item.balance in ["roundrobin", "static-rr", "leastconn", "first", "source", "uri", "url_param", "hdr", "rdp-cookie"])
+        or item.balance is not defined
       - item.balance in ["roundrobin", "static-rr", "leastconn", "first", "source", "uri", "url_param", "hdr", "rdp-cookie"]
       - item.servers is defined
       - item.servers | length > 0
