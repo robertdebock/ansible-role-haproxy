@@ -64,6 +64,8 @@
       - item.default_backend | length > 0
     quiet: yes
   loop: "{{ haproxy_frontends }}"
+  loop_control:
+    label: "{{ item.name }}"
 
 - name: test if item in haproxy_frontends with ssl is set correctly
   assert:
@@ -74,6 +76,8 @@
       - item.crts is iterable
     quiet: yes
   loop: "{{ haproxy_frontends }}"
+  loop_control:
+    label: "{{ item.name }}"
   when:
     - item.ssl is defined
 
@@ -110,3 +114,5 @@
       - (item.options is defined and item.options | length > 0 and item.options is iterable) or item.options is not defined
     quiet: yes
   loop: "{{ haproxy_backends }}"
+  loop_control:
+    label: "{{ item.name }}"
