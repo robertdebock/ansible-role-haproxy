@@ -7,9 +7,6 @@
   package:
     name: haproxy
     state: present
-  register: haproxy_install_haproxy
-  until: haproxy_install_haproxy is succeeded
-  retries: 3
 
 - name: create group
   group:
