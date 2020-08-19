@@ -4,6 +4,7 @@
     that:
       - haproxy_stats is defined
       - haproxy_stats | type_debug == "bool"
+    quiet: yes
 
 - name: test if haproxy_stats_port is set correctly
   assert:
@@ -12,6 +13,7 @@
       - haproxy_stats_port | int
       - haproxy_stats_port | int > 0
       - haproxy_stats_port | int < 65536
+    quiet: yes
 
 - name: test if haproxy_retries is set correctly
   assert:
@@ -19,6 +21,7 @@
       - haproxy_retries is defined
       - haproxy_retries | int
       - haproxy_retries | int >= 0
+    quiet: yes
 
 - name: test if {{ item }} is set correctly
   assert:
@@ -41,6 +44,7 @@
       - haproxy_maxconn is defined
       - haproxy_maxconn | int
       - haproxy_maxconn | int > 0
+    quiet: yes
 
 - name: test if haproxy_frontends is set correctly
   assert:
@@ -48,6 +52,7 @@
       - haproxy_frontends is defined
       - haproxy_frontends | length > 0
       - haproxy_frontends is iterable
+    quiet: yes
 
 - name: test if item in haproxy_frontends is set correctly
   assert:
@@ -87,6 +92,7 @@
       - haproxy_backends is defined
       - haproxy_backends | length > 0
       - haproxy_backends is iterable
+    quiet: yes
 
 - name: test if haproxy_backend_default_balance is set correctly
   assert:
@@ -94,6 +100,7 @@
       - haproxy_backend_default_balance is defined
       - haproxy_backend_default_balance | length > 0
       - haproxy_backend_default_balance in ["roundrobin", "static-rr", "leastconn", "first", "source", "uri", "url_param", "hdr", "rdp-cookie"]
+    quiet: yes
 
 - name: test if item in haproxy_backends is set correctly
   assert:
