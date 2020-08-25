@@ -25,6 +25,7 @@
     src: haproxy.cfg.j2
     dest: /etc/haproxy/haproxy.cfg
     validate: haproxy -c -f %s
+    mode: "0640"
   notify:
     - restart haproxy
   when:
