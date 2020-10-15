@@ -33,9 +33,7 @@ galaxy_info:
         - xenial
 
   galaxy_tags:
-    - centos
     - cloud
     - haproxy
-    - redhat
 
 dependencies: []
