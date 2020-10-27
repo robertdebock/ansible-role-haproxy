@@ -167,7 +167,7 @@ This role has been tested on these [container images](https://hub.docker.com/u/r
 |alpine|all|
 |el|7, 8|
 |debian|buster, bullseye|
-|fedora|31, 32|
+|fedora|all|
 |opensuse|all|
 |ubuntu|focal, bionic, xenial|
 
