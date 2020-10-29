@@ -5,7 +5,6 @@ repos:
     hooks:
       - id: trailing-whitespace
       - id: end-of-file-fixer
-      - id: check-yaml
       - id: check-added-large-files
 
   - repo: https://github.com/adrienverge/yamllint.git
@@ -18,9 +17,4 @@ repos:
     rev: v4.3.5
     hooks:
       - id: ansible-lint
-        # always_run: true
         pass_filenames: false
-        # verbose: true
-        # entry: env ANSIBLE_LIBRARY=./library ansible-lint --force-color -p -v .
-        # additional_dependencies:
-        #   - 'ansible < 2.10'
