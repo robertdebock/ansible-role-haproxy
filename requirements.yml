@@ -1,9 +1,10 @@
 ---
+roles:
 # httpd is added to test the connection. (see `molecule/default/verify.yml`)
-- robertdebock.bootstrap
-- robertdebock.buildtools
-- robertdebock.core_dependencies
-- robertdebock.epel
-- robertdebock.httpd
-- robertdebock.openssl
-- robertdebock.python_pip
+  - name: robertdebock.bootstrap
+  - name: robertdebock.buildtools
+  - name: robertdebock.core_dependencies
+  - name: robertdebock.epel
+  - name: robertdebock.httpd
+  - name: robertdebock.openssl
+  - name: robertdebock.python_pip
