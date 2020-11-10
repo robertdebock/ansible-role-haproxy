@@ -99,7 +99,7 @@
     that:
       - haproxy_backend_default_balance is defined
       - haproxy_backend_default_balance | length > 0
-      - haproxy_backend_default_balance in ["roundrobin", "static-rr", "leastconn", "first", "source", "uri", "url_param", "hdr", "rdp-cookie"]
+      - haproxy_backend_default_balance in [ "roundrobin", "static-rr", "leastconn", "first", "source", "uri", "url_param", "hdr", "rdp-cookie" ]
     quiet: yes
 
 - name: test if item in haproxy_backends is set correctly
@@ -108,9 +108,9 @@
       - item.name is defined
       - item.name | length > 0
       - (item.balance is defined
-        and item.balance in ["roundrobin", "static-rr", "leastconn", "first", "source", "uri", "url_param", "hdr", "rdp-cookie"])
+        and item.balance in [ "roundrobin", "static-rr", "leastconn", "first", "source", "uri", "url_param", "hdr", "rdp-cookie" ])
         or item.balance is not defined
-      - item.balance in ["roundrobin", "static-rr", "leastconn", "first", "source", "uri", "url_param", "hdr", "rdp-cookie"]
+      - item.balance in [ "roundrobin", "static-rr", "leastconn", "first", "source", "uri", "url_param", "hdr", "rdp-cookie" ]
       - item.servers is defined
       - item.servers | length > 0
       - item.servers is iterable
