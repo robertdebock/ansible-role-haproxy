@@ -10,7 +10,7 @@
   assert:
     that:
       - haproxy_stats_port is defined
-      - haproxy_stats_port | int
+      - haproxy_stats_port is number
       - haproxy_stats_port | int > 0
       - haproxy_stats_port | int < 65536
     quiet: yes
@@ -19,7 +19,7 @@
   assert:
     that:
       - haproxy_retries is defined
-      - haproxy_retries | int
+      - haproxy_retries is number
       - haproxy_retries | int >= 0
     quiet: yes
 
@@ -42,7 +42,7 @@
   assert:
     that:
       - haproxy_maxconn is defined
-      - haproxy_maxconn | int
+      - haproxy_maxconn is number
       - haproxy_maxconn | int > 0
     quiet: yes
 
@@ -62,7 +62,7 @@
       - item.address is defined
       - item.address | length > 0
       - item.port is defined
-      - item.port | int
+      - item.port is number
       - item.port | int > 0
       - item.port | int < 65536
       - item.default_backend is defined
@@ -115,7 +115,7 @@
       - item.servers | length > 0
       - item.servers is iterable
       - item.port is defined
-      - item.port | int
+      - item.port is number
       - item.port | int > 0
       - item.port | int < 65536
       - (item.options is defined and item.options | length > 0 and item.options is iterable) or item.options is not defined
