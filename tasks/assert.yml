@@ -100,7 +100,7 @@
       - item.name is defined
       - (item.balance is defined
         and item.balance in [ "roundrobin", "static-rr", "leastconn", "first", "source", "uri", "url_param", "hdr", "rdp-cookie" ])
-        or item.balance is not defined
+        or item.balance is undefined
       - item.balance in [ "roundrobin", "static-rr", "leastconn", "first", "source", "uri", "url_param", "hdr", "rdp-cookie" ]
       - item.servers is defined
       - item.servers is iterable
@@ -108,7 +108,7 @@
       - item.port is number
       - item.port | int > 0
       - item.port | int < 65536
-      - (item.options is defined item.options is iterable) or item.options is not defined
+      - (item.options is defined item.options is iterable) or item.options is undefined
     quiet: yes
   loop: "{{ haproxy_backends }}"
   loop_control:
