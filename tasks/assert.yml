@@ -3,7 +3,7 @@
   assert:
     that:
       - haproxy_stats is defined
-      - haproxy_stats | type_debug == "bool"
+      - haproxy_stats is boolean
     quiet: yes
 
 - name: test if haproxy_stats_port is set correctly
@@ -75,7 +75,7 @@
 - name: test if item in haproxy_frontends with ssl is set correctly
   assert:
     that:
-      - item.ssl | type_debug == "bool"
+      - item.ssl is boolean
       - item.crts is defined
       - item.crts | length > 0
       - item.crts is iterable
