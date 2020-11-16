@@ -11,8 +11,8 @@
     that:
       - haproxy_stats_port is defined
       - haproxy_stats_port is number
-      - haproxy_stats_port | int > 0
-      - haproxy_stats_port | int < 65536
+      - haproxy_stats_port > 0
+      - haproxy_stats_port < 65536
     quiet: yes
 
 - name: test if haproxy_retries is set correctly
@@ -20,7 +20,7 @@
     that:
       - haproxy_retries is defined
       - haproxy_retries is number
-      - haproxy_retries | int >= 0
+      - haproxy_retries >= 0
     quiet: yes
 
 - name: test if {{ item }} is set correctly
@@ -42,7 +42,7 @@
     that:
       - haproxy_maxconn is defined
       - haproxy_maxconn is number
-      - haproxy_maxconn | int > 0
+      - haproxy_maxconn > 0
     quiet: yes
 
 - name: test if haproxy_frontends is set correctly
@@ -59,8 +59,8 @@
       - item.address is defined
       - item.port is defined
       - item.port is number
-      - item.port | int > 0
-      - item.port | int < 65536
+      - item.port > 0
+      - item.port < 65536
       - item.default_backend is defined
     quiet: yes
   loop: "{{ haproxy_frontends }}"
@@ -106,8 +106,8 @@
       - item.servers is iterable
       - item.port is defined
       - item.port is number
-      - item.port | int > 0
-      - item.port | int < 65536
+      - item.port > 0
+      - item.port < 65536
       - (item.options is defined item.options is iterable) or item.options is undefined
     quiet: yes
   loop: "{{ haproxy_backends }}"
