@@ -108,7 +108,7 @@
       - item.port is number
       - item.port > 0
       - item.port < 65536
-      - (item.options is defined item.options is iterable) or item.options is undefined
+      - (item.options is defined and item.options is iterable) or item.options is undefined
     quiet: yes
   loop: "{{ haproxy_backends }}"
   loop_control:
