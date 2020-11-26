@@ -1,4 +1,5 @@
 ---
+
 - name: test if haproxy_stats is set correctly
   assert:
     that:
