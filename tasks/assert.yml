@@ -28,6 +28,7 @@
   assert:
     that:
       - item is defined
+      - item is string
     quiet: yes
   loop:
     - "{{ haproxy_timeout_http_request }}"
@@ -57,12 +58,15 @@
   assert:
     that:
       - item.name is defined
+      - item.name is string
       - item.address is defined
+      - item.address is string
       - item.port is defined
       - item.port is number
       - item.port > 0
       - item.port < 65536
       - item.default_backend is defined
+      - item.default_backend is string
     quiet: yes
   loop: "{{ haproxy_frontends }}"
   loop_control:
@@ -92,6 +96,7 @@
   assert:
     that:
       - haproxy_backend_default_balance is defined
+      - haproxy_backend_default_balance is string
       - haproxy_backend_default_balance in [ "roundrobin", "static-rr", "leastconn", "first", "source", "uri", "url_param", "hdr", "rdp-cookie" ]
     quiet: yes
 
@@ -99,10 +104,11 @@
   assert:
     that:
       - item.name is defined
+      - item.name is string
       - (item.balance is defined
+        and item.balance is string
         and item.balance in [ "roundrobin", "static-rr", "leastconn", "first", "source", "uri", "url_param", "hdr", "rdp-cookie" ])
         or item.balance is undefined
-      - item.balance in [ "roundrobin", "static-rr", "leastconn", "first", "source", "uri", "url_param", "hdr", "rdp-cookie" ]
       - item.servers is defined
       - item.servers is iterable
       - item.port is defined
