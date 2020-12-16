@@ -136,7 +136,7 @@ This role has been tested on these [container images](https://hub.docker.com/u/r
 |debian|buster, bullseye|
 |fedora|all|
 |opensuse|all|
-|ubuntu|focal, bionic, xenial|
+|ubuntu|focal, bionic|
 
 The minimum version of Ansible required is 2.9, tests have been done to:
 
@@ -151,6 +151,7 @@ Some variarations of the build matrix do not work. These are the variations and 
 | variation                 | reason                 |
 |---------------------------|------------------------|
 | amazonlinux:1 | /etc/init.d/haproxy: line 17: /etc/sysconfig/network: No such file or directory |
+| ubuntu:xenial | Setup script exited with error: command 'x86_64-linux-gnu-gcc' failed with exit status 1 |
 
 
 ## [Testing](#testing)
