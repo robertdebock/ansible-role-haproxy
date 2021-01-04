@@ -32,7 +32,6 @@
     quiet: yes
   loop:
     - "{{ haproxy_timeout_http_request }}"
-    - "{{ haproxy_timeout_queue }}"
     - "{{ haproxy_timeout_connect }}"
     - "{{ haproxy_timeout_client }}"
     - "{{ haproxy_timeout_server }}"

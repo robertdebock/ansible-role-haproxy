@@ -65,7 +65,6 @@ haproxy_stats_port: 1936
 # Default setttings for HAProxy.
 haproxy_retries: 3
 haproxy_timeout_http_request: 10s
-haproxy_timeout_queue: 1m
 haproxy_timeout_connect: 10s
 haproxy_timeout_client: 1m
 haproxy_timeout_server: 1m
