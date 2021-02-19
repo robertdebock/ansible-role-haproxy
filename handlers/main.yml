@@ -2,7 +2,7 @@
 # handlers file for haproxy
 
 - name: restart haproxy
-  service:
+  ansible.builtin.service:
     name: haproxy
     state: restarted
   when:

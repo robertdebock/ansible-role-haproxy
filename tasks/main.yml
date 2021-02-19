@@ -7,24 +7,24 @@
   delegate_to: localhost
 
 - name: install haproxy
-  package:
+  ansible.builtin.package:
     name: haproxy
     state: present
 
 - name: create group
-  group:
+  ansible.builtin.group:
     name: haproxy
     system: yes
     state: present
 
 - name: create user
-  user:
+  ansible.builtin.user:
     name: haproxy
     system: yes
     state: present
 
 - name: configure software
-  template:
+  ansible.builtin.template:
     src: haproxy.cfg.j2
     dest: /etc/haproxy/haproxy.cfg
     validate: haproxy -c -f %s
@@ -35,7 +35,7 @@
     - ansible_default_ipv4 is defined
 
 - name: add haproxy_stats_port to http_port_t selinux type
-  seport:
+  community.general.seport:
     ports: "{{ haproxy_stats_port }}"
     proto: tcp
     setype: http_port_t
@@ -46,7 +46,7 @@
     - ansible_selinux.status == "enabled"
 
 - name: start and enable haproxy
-  service:
+  ansible.builtin.service:
     name: haproxy
     state: started
     enabled: yes
