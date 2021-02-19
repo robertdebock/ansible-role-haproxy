@@ -9,5 +9,4 @@ roles:
   - name: robertdebock.openssl
   - name: robertdebock.python_pip
 collections:
-  - name: ansible.builtin
   - name: community.general
