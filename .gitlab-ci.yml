@@ -1,5 +1,5 @@
 ---
-image: robertdebock/github-action-molecule:2.6.6
+image: robertdebock/github-action-molecule:3.0.6
 
 services:
   - docker:dind
@@ -13,13 +13,11 @@ molecule:
     - image=${image} tag=${tag} molecule test
   rules:
     - if: $CI_COMMIT_REF_NAME == "master"
-  retry: 2
+  retry: 1
   parallel:
     matrix:
       - image: "alpine"
         tag: "latest"
-      - image: "centos"
-        tag: "7"
       - image: "centos"
         tag: "latest"
       - image: "debian"
