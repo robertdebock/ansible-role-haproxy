@@ -6,17 +6,17 @@
 
   tasks:
     - name: check if connection still works
-      ping:
+      ansible.builtin.ping:
 
     - name: check if ports responds
-      wait_for:
+      ansible.builtin.wait_for:
         port: "{{ item }}"
       loop:
         - 80
         - 443
 
     - name: check of content can be retrieved
-      uri:
+      ansible.builtin.uri:
         url: "{{ item }}"
         validate_certs: no
         status_code:
