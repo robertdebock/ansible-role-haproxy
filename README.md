@@ -18,26 +18,26 @@ This example is taken from `molecule/default/converge.yml` and is tested on each
 
   roles:
     - role: robertdebock.haproxy
-       haproxy_frontends:
-         - name: http
-           address: "*"
-           port: 80
-           default_backend: backend
-         - name: https
-           address: "*"
-           port: 443
-           default_backend: backend
-           ssl: yes
-           crts:
-             - /tmp/haproxy.keycrt
-       haproxy_backend_default_balance: roundrobin
-       haproxy_backends:
-         - name: backend
-           balance: roundrobin
-           servers: "{{ groups['all'] }}"
-           port: 8080
-           options:
-             - check
+      haproxy_frontends:
+        - name: http
+          address: "*"
+          port: 80
+          default_backend: backend
+        - name: https
+          address: "*"
+          port: 443
+          default_backend: backend
+          ssl: yes
+          crts:
+            - /tmp/haproxy.keycrt
+      haproxy_backend_default_balance: roundrobin
+      haproxy_backends:
+        - name: backend
+          balance: roundrobin
+          servers: "{{ groups['all'] }}"
+          port: 8080
+          options:
+            - check
 ```
 
 The machine needs to be prepared in CI this is done using `molecule/default/prepare.yml`:
