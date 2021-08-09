@@ -15,11 +15,6 @@
       openssl_items:
         - name: haproxy
           common_name: "{{ ansible_fqdn }}"
-    - role: robertdebock.openssl
-      openssl_items:
-        - name: apache-httpd
-          common_name: "{{ ansible_fqdn }}"
     # This role is applied to serve as a mock "backend" server. See `molecule/default/verify.yml`.
     - role: robertdebock.httpd
       httpd_port: 8080
-      httpd_ssl_port: 8443

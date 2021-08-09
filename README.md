@@ -18,6 +18,26 @@ This example is taken from `molecule/default/converge.yml` and is tested on each
 
   roles:
     - role: robertdebock.haproxy
+       haproxy_frontends:
+         - name: http
+           address: "*"
+           port: 80
+           default_backend: backend
+         - name: https
+           address: "*"
+           port: 443
+           default_backend: backend
+           ssl: yes
+           crts:
+             - /tmp/haproxy.keycrt
+       haproxy_backend_default_balance: roundrobin
+       haproxy_backends:
+         - name: backend
+           balance: roundrobin
+           servers: "{{ groups['all'] }}"
+           port: 8080
+           options:
+             - check
 ```
 
 The machine needs to be prepared in CI this is done using `molecule/default/prepare.yml`:
@@ -39,14 +59,9 @@ The machine needs to be prepared in CI this is done using `molecule/default/prep
       openssl_items:
         - name: haproxy
           common_name: "{{ ansible_fqdn }}"
-    - role: robertdebock.openssl
-      openssl_items:
-        - name: apache-httpd
-          common_name: "{{ ansible_fqdn }}"
     # This role is applied to serve as a mock "backend" server. See `molecule/default/verify.yml`.
     - role: robertdebock.httpd
       httpd_port: 8080
-      httpd_ssl_port: 8443
 ```
 
 Also see a [full explanation and example](https://robertdebock.nl/how-to-use-these-roles.html) on how to use these roles.
@@ -73,30 +88,28 @@ haproxy_timeout_check: 10s
 haproxy_maxconn: 3000
 
 # A list of frontends and their properties.
-haproxy_frontends:
-  - name: http
-    address: "*"
-    port: 80
-    default_backend: backend
-  - name: https
-    address: "*"
-    port: 443
-    default_backend: backend
-    ssl: yes
-    crts:
-      - /tmp/haproxy.keycrt
-
-haproxy_backend_default_balance: roundrobin
-
-haproxy_backends:
-  - name: backend
-    balance: roundrobin
-    servers: "{{ groups['all'] }}"
-    port: 8443
-    options:
-      - check
-      - ssl
-      - verify none
+# haproxy_frontends:
+#   - name: http
+#     address: "*"
+#     port: 80
+#     default_backend: backend
+#   - name: https
+#     address: "*"
+#     port: 443
+#     default_backend: backend
+#     ssl: yes
+#     crts:
+#       - /tmp/haproxy.keycrt
+# haproxy_backend_default_balance: roundrobin
+# haproxy_backends:
+#   - name: backend
+#     balance: roundrobin
+#     servers: "{{ groups['all'] }}"
+#     port: 8443
+#     options:
+#       - check
+#       - ssl
+#       - verify none
 ```
 
 ## [Requirements](#requirements)
