@@ -45,6 +45,12 @@
     - ansible_selinux.status is defined
     - ansible_selinux.status == "enabled"
 
+- name: allow haproxy to open any port
+  ansible.posix.seboolean:
+    name: haproxy_connect_any
+    state: yes
+    persistent: yes
+
 - name: start and enable haproxy
   ansible.builtin.service:
     name: haproxy
