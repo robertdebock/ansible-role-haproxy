@@ -24,7 +24,7 @@
       - haproxy_retries >= 0
     quiet: yes
 
-- name: test if {{ item }} is set correctly
+- name: test if timeouts are set correctly
   ansible.builtin.assert:
     that:
       - item is defined
