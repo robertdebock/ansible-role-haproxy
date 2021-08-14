@@ -50,6 +50,9 @@
     name: haproxy_connect_any
     state: yes
     persistent: yes
+  when:
+    - ansible_selinux.status is defined
+    - ansible_connection != "docker"
 
 - name: start and enable haproxy
   ansible.builtin.service:
