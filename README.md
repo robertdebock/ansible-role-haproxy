@@ -33,6 +33,7 @@ This example is taken from `molecule/default/converge.yml` and is tested on each
       haproxy_backend_default_balance: roundrobin
       haproxy_backends:
         - name: backend
+          httpcheck: yes
           balance: roundrobin
           servers: "{{ groups['all'] }}"
           port: 8080
@@ -103,6 +104,8 @@ haproxy_maxconn: 3000
 # haproxy_backend_default_balance: roundrobin
 # haproxy_backends:
 #   - name: backend
+#     httpcheck: yes
+#     httpcheck_method: OPTIONS / HTTP/1.0
 #     balance: roundrobin
 #     servers: "{{ groups['all'] }}"
 #     port: 8443

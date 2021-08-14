@@ -21,6 +21,7 @@
       haproxy_backend_default_balance: roundrobin
       haproxy_backends:
         - name: backend
+          httpcheck: yes
           balance: roundrobin
           servers: "{{ groups['all'] }}"
           port: 8080
