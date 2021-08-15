@@ -49,9 +49,15 @@
         name: haproxy_connect_any
         state: yes
         persistent: yes
+      notify:
+        - reboot
   when:
     - ansible_selinux.status is defined
     - ansible_selinux.status == "enabled"
+
+- name: flush handlers
+  meta: flush_handlers
+
 
 - name: start and enable haproxy
   ansible.builtin.service:
