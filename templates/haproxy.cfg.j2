@@ -45,7 +45,7 @@ frontend {{ frontend.name }}
 {% for backend in haproxy_backends %}
 backend {{ backend.name }}
 {% if backend.httpcheck %}
-    option httpchk{% if backend.httpcheck_method is defined %}{{ backend.httpcheck_method }}{% endif %}{% endif %}
+    option httpchk {% if backend.httpcheck_method is defined %}{{ backend.httpcheck_method }}{% endif %}{% endif %}
 
     balance {{ backend.balance | default(haproxy_backend_default_balance) }}
 {% for server in backend.servers %}
