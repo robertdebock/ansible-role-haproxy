@@ -7,9 +7,9 @@
   vars:
     _netcat_package:
       default: nc
-      Alpine: netcat-openbsd
-      Debian: netcat
-      Suse: netcat-openbsd
+      Alpine: &package_openbsd netcat-openbsd
+      Debian: *package_openbsd
+      Suse: *package_openbsd
     netcat_package: "{{ _netcat_package[ansible_os_family] | default(_netcat_package['default']) }}"
 
   tasks:
