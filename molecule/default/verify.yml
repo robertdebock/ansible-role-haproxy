@@ -32,7 +32,7 @@
 
     - name: check if stats are available
       ansible.builtin.shell:
-        cmd: echo "show stat" | nc -U /var/lib/haproxy/stats
+        cmd: echo "show stat" | netcat -U /var/lib/haproxy/stats
       changed_when: no
 
   handlers:
