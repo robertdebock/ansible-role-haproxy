@@ -4,10 +4,18 @@
   become: yes
   gather_facts: no
 
+  vars:
+    _netcat_package:
+      default: nc
+      Alpine: netcat-openbsd
+      Debian: netcat
+      Suse: netcat-openbsd
+    netcat_package: "{{ _netcat_package[ansible_os_family] | default(_netcat_package['default']) }}"
+
   tasks:
     - name: install testing requirements
       package:
-        name: nc
+        name: "{{ netcat_package }}"
         state: present
       notify:
         - uninstall testing requirements
@@ -38,5 +46,5 @@
   handlers:
     - name: uninstall testing requirements
       package:
-        name: nc
+        name: "{{ netcat_package }}"
         state: absent
