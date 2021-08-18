@@ -4,18 +4,10 @@
   become: yes
   gather_facts: yes
 
-  vars:
-    _netcat_package:
-      default: nc
-      Alpine: &package_openbsd netcat-openbsd
-      Debian: *package_openbsd
-      Suse: *package_openbsd
-    netcat_package: "{{ _netcat_package[ansible_os_family] | default(_netcat_package['default']) }}"
-
   tasks:
     - name: install testing requirements
       package:
-        name: "{{ netcat_package }}"
+        name: socat
         state: present
       notify:
         - uninstall testing requirements
@@ -40,11 +32,11 @@
 
     - name: check if stats are available
       ansible.builtin.shell:
-        cmd: echo "show stat" | netcat -U /var/lib/haproxy/stats
+        cmd: echo "show stat" | socat unix-connect:/var/lib/haproxy/stats stdio
       changed_when: no
 
   handlers:
     - name: uninstall testing requirements
       package:
-        name: "{{ netcat_package }}"
+        name: socat
         state: absent
