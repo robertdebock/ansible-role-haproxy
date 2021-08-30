@@ -6,7 +6,7 @@
 
   tasks:
     - name: install testing requirements
-      package:
+      ansible.builtin.package:
         name: socat
         state: present
       notify:
@@ -37,6 +37,6 @@
 
   handlers:
     - name: uninstall testing requirements
-      package:
+      ansible.builtin.package:
         name: socat
         state: absent
