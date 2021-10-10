@@ -44,6 +44,7 @@
         state: present
       when:
         - haproxy_stats_port is defined
+
     - name: allow haproxy to open any port
       ansible.posix.seboolean:
         name: haproxy_connect_any
