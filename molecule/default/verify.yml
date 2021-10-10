@@ -36,6 +36,7 @@
       changed_when: no
 
   handlers:
+
     - name: uninstall testing requirements
       ansible.builtin.package:
         name: socat

@@ -1,0 +1,10 @@
+---
+rules:
+  version: "0.2"
+  exclude_files:
+    - meta/preferences.yml
+    - meta/exception.yml
+    - requirements.txt
+  exclude_filter:
+    - LINT0009
+    - ANSIBLE0007
