@@ -23,7 +23,5 @@ platforms:
     pre_build_image: yes
 provisioner:
   name: ansible
-  env:
-    ANSIBLE_ASYNC_DIR: "/tmp/ansible_async_dir"
 verifier:
   name: ansible

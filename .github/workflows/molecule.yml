@@ -65,4 +65,3 @@ jobs:
         with:
           image: ${{ matrix.config.image }}
           tag: ${{ matrix.config.tag }}
-          command: "--debug test"
