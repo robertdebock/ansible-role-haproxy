@@ -50,7 +50,10 @@ backend {{ backend.name }}
     balance {{ backend.balance | default(haproxy_backend_default_balance) }}
     mode {{ backend.mode | default('http') }}
 {% for server in backend.servers %}
+{% if server.name is defined %}
+    server {{ server.name }} {{ server.address | default(hostvars[server.name]['ansible_default_ipv4']['address']) }}:{{ server.port | default(backend.port) }} {{ backend.options | join(' ') }}
+{% else %}
     server {{ server }} {{ hostvars[server]['ansible_default_ipv4']['address'] }}:{{ backend.port }} {{ backend.options | join(' ') }}
+{% endif %}
 {% endfor %}
-
 {% endfor %}

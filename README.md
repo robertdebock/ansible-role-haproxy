@@ -40,6 +40,8 @@ This example is taken from `molecule/default/converge.yml` and is tested on each
         - name: backend
           httpcheck: yes
           balance: roundrobin
+          # You can refer to hosts in an Ansible group.
+          # The `ansible_default_ipv4` will be used as an address to connect to.
           servers: "{{ groups['all'] }}"
           port: 8080
           options:
@@ -47,7 +49,14 @@ This example is taken from `molecule/default/converge.yml` and is tested on each
         - name: smtp
           httpcheck: yes
           balance: roundrobin
-          servers: "{{ groups['all'] }}"
+          # You can also refer to a list of servers.
+          servers:
+            - name: first
+              address: "127.0.0.1"
+              port: 25
+            - name: second
+              address: "127.0.0.2"
+              port: 25
           port: 25
           options:
             - check
