@@ -30,6 +30,11 @@ This example is taken from `molecule/default/converge.yml` and is tested on each
           ssl: yes
           crts:
             - /tmp/haproxy.keycrt
+        - name: smtp
+          address: "*"
+          port: 25
+          default_backend: smtp
+          mode: tcp
       haproxy_backend_default_balance: roundrobin
       haproxy_backends:
         - name: backend
@@ -37,6 +42,13 @@ This example is taken from `molecule/default/converge.yml` and is tested on each
           balance: roundrobin
           servers: "{{ groups['all'] }}"
           port: 8080
+          options:
+            - check
+        - name: smtp
+          httpcheck: yes
+          balance: roundrobin
+          servers: "{{ groups['all'] }}"
+          port: 25
           options:
             - check
 ```
@@ -87,32 +99,6 @@ haproxy_timeout_server: 1m
 haproxy_timeout_http_keep_alive: 10s
 haproxy_timeout_check: 10s
 haproxy_maxconn: 3000
-
-# A list of frontends and their properties.
-# haproxy_frontends:
-#   - name: http
-#     address: "*"
-#     port: 80
-#     default_backend: backend
-#   - name: https
-#     address: "*"
-#     port: 443
-#     default_backend: backend
-#     ssl: yes
-#     crts:
-#       - /tmp/haproxy.keycrt
-# haproxy_backend_default_balance: roundrobin
-# haproxy_backends:
-#   - name: backend
-#     httpcheck: yes
-#     httpcheck_method: OPTIONS / HTTP/1.0
-#     balance: roundrobin
-#     servers: "{{ groups['all'] }}"
-#     port: 8443
-#     options:
-#       - check
-#       - ssl
-#       - verify none
 ```
 
 ## [Requirements](#requirements)

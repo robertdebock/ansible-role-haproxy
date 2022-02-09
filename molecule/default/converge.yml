@@ -18,6 +18,11 @@
           ssl: yes
           crts:
             - /tmp/haproxy.keycrt
+        - name: smtp
+          address: "*"
+          port: 25
+          default_backend: smtp
+          mode: tcp
       haproxy_backend_default_balance: roundrobin
       haproxy_backends:
         - name: backend
@@ -25,5 +30,12 @@
           balance: roundrobin
           servers: "{{ groups['all'] }}"
           port: 8080
+          options:
+            - check
+        - name: smtp
+          httpcheck: yes
+          balance: roundrobin
+          servers: "{{ groups['all'] }}"
+          port: 25
           options:
             - check
