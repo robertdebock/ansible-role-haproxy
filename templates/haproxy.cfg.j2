@@ -26,7 +26,6 @@ defaults
     timeout http-keep-alive {{ haproxy_timeout_http_keep_alive }}
     timeout check           {{ haproxy_timeout_check }}
     maxconn                 {{ haproxy_maxconn }}
-
 {% if haproxy_stats == true %}
 listen stats
     bind                 :{{ haproxy_stats_port }}
@@ -34,19 +33,19 @@ listen stats
     stats                enable
     stats                uri /stats
 {% endif %}
-
 {% for frontend in haproxy_frontends %}
 frontend {{ frontend.name }}
     bind {{ frontend.address }}:{{ frontend.port }}{% if frontend.ssl is defined and frontend.ssl == true %} ssl{% endif %}{% if frontend.crts is defined and frontend.crts | length >0 %}{% for crt in frontend.crts %} crt {{ crt }}{% endfor %}{% endif %}
-
     default_backend {{ frontend.default_backend }}
     mode {{ frontend.mode | default('http') }}
+    option {{ frontend.option | default('httplog') }}
+
 {% endfor %}
+
 {% for backend in haproxy_backends %}
 backend {{ backend.name }}
 {% if backend.httpcheck %}
     option httpchk {% if backend.httpcheck_method is defined %}{{ backend.httpcheck_method }}{% endif %}{% endif %}
-
     balance {{ backend.balance | default(haproxy_backend_default_balance) }}
     mode {{ backend.mode | default('http') }}
 {% for server in backend.servers %}
@@ -56,4 +55,5 @@ backend {{ backend.name }}
     server {{ server }} {{ hostvars[server]['ansible_default_ipv4']['address'] }}:{{ backend.port }} {{ backend.options | join(' ') }}
 {% endif %}
 {% endfor %}
+
 {% endfor %}

@@ -23,6 +23,7 @@
           port: 25
           default_backend: smtp
           mode: tcp
+          option: tcplog
       haproxy_backend_default_balance: roundrobin
       haproxy_backends:
         - name: backend
