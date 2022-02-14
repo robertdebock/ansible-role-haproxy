@@ -7,10 +7,6 @@
   roles:
     - role: ansible-role-haproxy
       haproxy_frontends:
-        - name: http
-          address: "*"
-          port: 80
-          default_backend: backend
         - name: https
           address: "*"
           port: 443
@@ -18,12 +14,6 @@
           ssl: yes
           crts:
             - /tmp/haproxy.keycrt
-        - name: smtp
-          address: "*"
-          port: 25
-          default_backend: smtp
-          mode: tcp
-          option: tcplog
       haproxy_backend_default_balance: roundrobin
       haproxy_backends:
         - name: backend
@@ -33,19 +23,5 @@
           # The `ansible_default_ipv4` will be used as an address to connect to.
           servers: "{{ groups['all'] }}"
           port: 8080
-          options:
-            - check
-        - name: smtp
-          httpcheck: yes
-          balance: roundrobin
-          # You can also refer to a list of servers.
-          servers:
-            - name: first
-              address: "127.0.0.1"
-              port: 25
-            - name: second
-              address: "127.0.0.2"
-              port: 25
-          port: 25
           options:
             - check
