@@ -7,13 +7,10 @@
   roles:
     - role: ansible-role-haproxy
       haproxy_frontends:
-        - name: https
+        - name: http
           address: "*"
-          port: 443
+          port: 80
           default_backend: backend
-          ssl: yes
-          crts:
-            - /tmp/haproxy.keycrt
       haproxy_backend_default_balance: roundrobin
       haproxy_backends:
         - name: backend
