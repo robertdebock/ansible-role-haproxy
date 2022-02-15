@@ -41,6 +41,7 @@ frontend {{ frontend.name }}
 
     default_backend {{ frontend.default_backend }}
     mode {{ frontend.mode | default('http') }}
+    option {{ frontend.option | default('httplog') }}
 {% endfor %}
 {% for backend in haproxy_backends %}
 backend {{ backend.name }}
