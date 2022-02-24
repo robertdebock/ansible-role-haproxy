@@ -39,6 +39,12 @@ This example is taken from `molecule/default/converge.yml` and is tested on each
       haproxy_backends:
         - name: backend
           httpcheck: yes
+          # You can tell how the health check must be done.
+          http_check:
+            send:
+              method: GET
+              uri: /healthz
+            expect: status 200
           balance: roundrobin
           # You can refer to hosts in an Ansible group.
           # The `ansible_default_ipv4` will be used as an address to connect to.
@@ -152,15 +158,6 @@ The minimum version of Ansible required is 2.10, tests have been done to:
 - The previous version.
 - The current version.
 - The development version.
-
-## [Exceptions](#exceptions)
-
-Some roles can't run on a specific distribution or version. Here are some exceptions.
-
-| variation                 | reason                 |
-|---------------------------|------------------------|
-| amazonlinux:1 | /etc/init.d/haproxy: line 17: /etc/sysconfig/network: No such file or directory |
-| ubuntu:xenial | Setup script exited with error: command 'x86_64-linux-gnu-gcc' failed with exit status 1 |
 
 
 If you find issues, please register them in [GitHub](https://github.com/robertdebock/ansible-role-haproxy/issues)

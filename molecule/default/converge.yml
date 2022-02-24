@@ -27,6 +27,12 @@
       haproxy_backends:
         - name: backend
           httpcheck: yes
+          # You can tell how the health check must be done.
+          http_check:
+            send:
+              method: GET
+              uri: /healthz
+            expect: status 200
           balance: roundrobin
           # You can refer to hosts in an Ansible group.
           # The `ansible_default_ipv4` will be used as an address to connect to.
