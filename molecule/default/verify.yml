@@ -25,7 +25,6 @@
         validate_certs: no
         status_code:
           - 200
-          - 403
       loop:
         - "http://localhost/"
         - "https://localhost/"

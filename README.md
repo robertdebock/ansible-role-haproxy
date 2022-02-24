@@ -43,7 +43,7 @@ This example is taken from `molecule/default/converge.yml` and is tested on each
           http_check:
             send:
               method: GET
-              uri: /healthz
+              uri: /health.html
             expect: status 200
           balance: roundrobin
           # You can refer to hosts in an Ansible group.
@@ -100,6 +100,11 @@ The machine needs to be prepared. In CI this is done using `molecule/default/pre
     httpd_data_directory: "{{ _httpd_data_directory[ansible_os_family] | default(_httpd_data_directory['default'] ) }}"
   post_tasks:
     - name: place health check
+      ansible.builtin.copy:
+        content: 'ok'
+        dest: "{{ httpd_data_directory }}/health.html"
+
+    - name: place sample page
       ansible.builtin.copy:
         content: 'Hello world!'
         dest: "{{ httpd_data_directory }}/index.html"
