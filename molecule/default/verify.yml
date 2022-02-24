@@ -12,7 +12,7 @@
       notify:
         - uninstall testing requirements
 
-    - name: check if ports responds
+    - name: check if port responds
       ansible.builtin.wait_for:
         port: "{{ item }}"
       loop:
@@ -36,7 +36,6 @@
       changed_when: no
 
   handlers:
-
     - name: uninstall testing requirements
       ansible.builtin.package:
         name: socat

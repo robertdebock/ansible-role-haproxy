@@ -90,6 +90,19 @@ The machine needs to be prepared. In CI this is done using `molecule/default/pre
     # This role is applied to serve as a mock "backend" server. See `molecule/default/verify.yml`.
     - role: robertdebock.httpd
       httpd_port: 8080
+
+  vars:
+    _httpd_data_directory:
+      default: /var/www/html
+      Alpine: /var/www/localhost/htdocs
+      Suse: /srv/www/htdocs
+
+    httpd_data_directory: "{{ _httpd_data_directory[ansible_os_family] | default(_httpd_data_directory['default'] ) }}"
+  post_tasks:
+    - name: place health check
+      ansible.builtin.copy:
+        content: 'Hello world!'
+        dest: "{{ httpd_data_directory }}/index.html"
 ```
 
 Also see a [full explanation and example](https://robertdebock.nl/how-to-use-these-roles.html) on how to use these roles.

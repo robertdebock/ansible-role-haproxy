@@ -31,7 +31,7 @@
           http_check:
             send:
               method: GET
-              uri: /healthz
+              uri: /healthz.html
             expect: status 200
           balance: roundrobin
           # You can refer to hosts in an Ansible group.
