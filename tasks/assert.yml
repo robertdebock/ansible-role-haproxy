@@ -19,8 +19,8 @@
 - name: test if haproxy_stats_bind_addr is set correctly
   ansible.builtin.assert:
     that:
-      - haproxy_stats_port is defined
-      - haproxy_stats_port is string
+      - haproxy_stats_bind_addr is defined
+      - haproxy_stats_bind_addr is string
     quiet: yes
 
 - name: test if haproxy_retries is set correctly
