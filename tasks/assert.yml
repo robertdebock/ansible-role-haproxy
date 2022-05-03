@@ -16,6 +16,13 @@
       - haproxy_stats_port < 65536
     quiet: yes
 
+- name: test if haproxy_stats_bind_addr is set correctly
+  ansible.builtin.assert:
+    that:
+      - haproxy_stats_port is defined
+      - haproxy_stats_port is string
+    quiet: yes
+
 - name: test if haproxy_retries is set correctly
   ansible.builtin.assert:
     that:
