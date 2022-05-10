@@ -29,7 +29,7 @@ defaults
 
 {% if haproxy_stats == true %}
 listen stats
-    bind                 :{{ haproxy_stats_port }}
+    bind                 {{haproxy_stats_bind_addr }}:{{ haproxy_stats_port }}
     mode                 http
     stats                enable
     stats                uri /stats
