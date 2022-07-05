@@ -1,8 +1,0 @@
-+ grep -v '^#' /Users/robertdb/Documents/github.com/robertdebock/move_to_collections/from_to_flat.txt
-+ read -r from to
-+ echo 'FROM: import_tasks'
-FROM: import_tasks
-+ echo 'TO: ansible.builtin.import_tasks'
-TO: ansible.builtin.import_tasks
-+ grep -E '  +import_tasks: ./tasks/assert.yml'
-+ read -r from to
