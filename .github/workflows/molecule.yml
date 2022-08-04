@@ -30,7 +30,9 @@ jobs:
       matrix:
         config:
           - image: "enterpriselinux"
-            tag: "latest"
+            tag: "8"
+          - image: "enterpriselinux"
+            tag: "9"
           - image: "debian"
             tag: "latest"
           - image: "debian"
