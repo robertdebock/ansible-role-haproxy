@@ -32,7 +32,7 @@ jobs:
           - image: "enterpriselinux"
             tag: "8"
           - image: "enterpriselinux"
-            tag: "9"
+            tag: "latest"
           - image: "debian"
             tag: "latest"
           - image: "debian"
