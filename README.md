@@ -4,7 +4,7 @@ Install and configure haproxy on your system.
 
 |GitHub|GitLab|Quality|Downloads|Version|
 |------|------|-------|---------|-------|
-|[![github](https://github.com/robertdebock/ansible-role-haproxy/workflows/Ansible%20Molecule/badge.svg)](https://github.com/robertdebock/ansible-role-haproxy/actions)|[![gitlab](https://gitlab.com/robertdebock-iac/ansible-role-haproxy/badges/master/pipeline.svg)](https://gitlab.com/robertdebock-iac/ansible-role-haproxy)|[![quality](https://img.shields.io/ansible/quality/28674)](https://galaxy.ansible.com/robertdebock/haproxy)|[![downloads](https://img.shields.io/ansible/role/d/28674)](https://galaxy.ansible.com/robertdebock/haproxy)|[![Version](https://img.shields.io/github/release/robertdebock/ansible-role-haproxy.svg)](https://github.com/robertdebock/ansible-role-haproxy/releases/)|
+|[![github](https://github.com/robertdebock/ansible-role-haproxy/workflows/Ansible%20Molecule/badge.svg)](https://github.com/robertdebock/ansible-role-haproxy/actions)|[![gitlab](https://gitlab.com/robertdebock-iac/ansible-role-haproxy/badges/master/pipeline.svg)](https://gitlab.com/robertdebock-iac/ansible-role-haproxy)|[![quality](https://img.shields.io/ansible/quality/)](https://galaxy.ansible.com/robertdebock/haproxy)|[![downloads](https://img.shields.io/ansible/role/d/)](https://galaxy.ansible.com/robertdebock/haproxy)|[![Version](https://img.shields.io/github/release/robertdebock/ansible-role-haproxy.svg)](https://github.com/robertdebock/ansible-role-haproxy/releases/)|
 
 ## [Example Playbook](#example-playbook)
 
@@ -143,7 +143,7 @@ haproxy_maxconn: 3000
 
 - pip packages listed in [requirements.txt](https://github.com/robertdebock/ansible-role-haproxy/blob/master/requirements.txt).
 
-## [Status of used roles](#status-of-requirements)
+## [State of used roles](#state-of-used-roles)
 
 The following roles are used to prepare a system. You can prepare your system in another way.
 
