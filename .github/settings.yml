@@ -5,4 +5,4 @@
 repository:
   description: Install and configure haproxy on your system.
   homepage: https://robertdebock.nl/
-  topics: cloud, haproxy, ansible, molecule, tox, playbook, hacktoberfest
+  topics: cloud, haproxy, ansible, molecule, tox, playbook
