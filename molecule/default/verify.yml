@@ -5,21 +5,21 @@
   gather_facts: no
 
   tasks:
-    - name: install testing requirements
+    - name: Install testing requirements
       ansible.builtin.package:
         name: socat
         state: present
       notify:
         - uninstall testing requirements
 
-    - name: check if port responds
+    - name: Check if port responds
       ansible.builtin.wait_for:
         port: "{{ item }}"
       loop:
         - 80
         - 443
 
-    - name: check of content can be retrieved
+    - name: Check of content can be retrieved
       ansible.builtin.uri:
         url: "{{ item }}"
         validate_certs: no
@@ -29,13 +29,13 @@
         - "http://localhost/"
         - "https://localhost/"
 
-    - name: check if stats are available
+    - name: Check if stats are available
       ansible.builtin.shell:
         cmd: "echo 'show stat' | socat unix-connect:/var/lib/haproxy/stats stdio"
       changed_when: no
 
   handlers:
-    - name: uninstall testing requirements
+    - name: Uninstall testing requirements
       ansible.builtin.package:
         name: socat
         state: absent
