@@ -10,7 +10,7 @@
         name: socat
         state: present
       notify:
-        - uninstall testing requirements
+        - Uninstall testing requirements
 
     - name: Check if port responds
       ansible.builtin.wait_for:
