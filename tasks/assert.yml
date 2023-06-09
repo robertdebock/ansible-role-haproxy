@@ -21,6 +21,7 @@
     that:
       - haproxy_stats_bind_addr is defined
       - haproxy_stats_bind_addr is string
+      - haproxy_stats_bind_addr is not none
     quiet: yes
 
 - name: assert | Test if haproxy_retries is set correctly
@@ -36,6 +37,7 @@
     that:
       - item is defined
       - item is string
+      - item is not none
     quiet: yes
   loop:
     - "{{ haproxy_timeout_http_request }}"
@@ -65,14 +67,17 @@
     that:
       - item.name is defined
       - item.name is string
+      - item.name is not none
       - item.address is defined
       - item.address is string
+      - item.address is not none
       - item.port is defined
       - item.port is number
       - item.port > 0
       - item.port < 65536
       - item.default_backend is defined
       - item.default_backend is string
+      - item.default_backend is not none
     quiet: yes
   loop: "{{ haproxy_frontends }}"
   loop_control:
@@ -123,6 +128,7 @@
     that:
       - item.name is defined
       - item.name is string
+      - item.name is not none
       - (item.balance is defined
         and item.balance is string
         and item.balance in [ "roundrobin", "static-rr", "leastconn", "first", "source", "uri", "url_param", "hdr", "rdp-cookie" ])
@@ -166,6 +172,7 @@
   ansible.builtin.assert:
     that:
       - item.httpcheck_method is string
+      - item.httpcheck_method is not none
       - item.httpcheck is defined
     quiet: yes
   loop: "{{ haproxy_backends }}"
@@ -192,7 +199,7 @@
       - item.http_check.send.method is defined
       - item.http_check.send.method in [ "GET", "HEAD" ]
       - item.http_check.send.uri is defined
-      - item.http_check.send.uri is string
+      - item.http_check.send.uri is not none
     quiet: yes
   loop: "{{ haproxy_backends }}"
   loop_control:
@@ -204,6 +211,7 @@
   ansible.builtin.assert:
     that:
       - item.http_check.expect is string
+      - item.http_check.expect is not none
     quiet: yes
   loop: "{{ haproxy_backends }}"
   loop_control:
