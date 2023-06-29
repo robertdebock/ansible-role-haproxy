@@ -42,8 +42,8 @@
           options:
             - check
         - name: smtp
-          httpcheck: yes
-          balance: roundrobin
+          balance: leastconn
+          mode: tcp
           # You can also refer to a list of servers.
           servers:
             - name: first
@@ -53,5 +53,3 @@
               address: "127.0.0.2"
               port: 25
           port: 25
-          options:
-            - check
