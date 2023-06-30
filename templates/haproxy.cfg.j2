@@ -59,7 +59,7 @@ backend {{ backend.name }}
 {% if server.name is defined %}
     server {{ server.name }} {{ server.address | default(hostvars[server.name]['ansible_default_ipv4']['address']) }}:{{ server.port | default(backend.port) }} {% if backend.options is defined %}{{ backend.options | join(' ') }}{% endif %}
 
-{% else %}
+{% elif ansible_default_ipv4 is defined %}
     server {{ server }} {{ hostvars[server]['ansible_default_ipv4']['address'] }}:{{ backend.port }} {% if backend.options is defined %}{{ backend.options | join(' ') }}{% endif %}
 
 {% endif %}
