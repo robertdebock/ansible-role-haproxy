@@ -69,6 +69,7 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
       haproxy_listen_default_balance: roundrobin
       haproxy_listens:
         - name: listen
+          address: "*"
           httpcheck: yes
           listen_port: 8081
           balance: roundrobin
