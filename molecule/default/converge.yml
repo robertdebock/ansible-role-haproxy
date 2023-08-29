@@ -56,6 +56,7 @@
       haproxy_listen_default_balance: roundrobin
       haproxy_listens:
         - name: listen
+          address: "*"
           httpcheck: yes
           listen_port: 8081
           balance: roundrobin
