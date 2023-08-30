@@ -79,7 +79,6 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
           port: 8080
           options:
             - maxconn 100000
-
 ```
 
 The machine needs to be prepared. In CI this is done using [`molecule/default/prepare.yml`](https://github.com/robertdebock/ansible-role-haproxy/blob/master/molecule/default/prepare.yml):
@@ -155,6 +154,9 @@ haproxy_frontends: []
 haproxy_backend_default_balance: roundrobin
 haproxy_backends: []
 
+# For the listening lists:
+haproxy_listen_default_balance: roundrobin
+haproxy_listens: []
 ```
 
 ## [Requirements](#requirements)
