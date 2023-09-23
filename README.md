@@ -24,6 +24,11 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
           address: "*"
           port: 80
           default_backend: backend
+          # You can optionally set custom configuration here. This is useful for things like redirecting traffic based on the URL.
+          # custom_config: >
+          #   tcp-request inspect-delay 5s
+          #   acl my_blog hdr(host) -i blog.example.domain
+          #   use_backend backend if my_blog
         - name: https
           address: "*"
           port: 443
