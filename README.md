@@ -1,4 +1,4 @@
-# [haproxy](#haproxy)
+# Ansible role [haproxy](#haproxy)
 
 Install and configure haproxy on your system.
 
