@@ -61,7 +61,10 @@ jobs:
       - name: parse apparmor for mysql
         run: sudo apparmor_parser -R /etc/apparmor.d/usr.sbin.mysqld
       - name: community.docker
-        run: ansible-galaxy collection install --collections-path /usr/share/ansible/collections  community.docker ansible.posix --force
+        run: |
+          ansible-galaxy collection list
+          ansible-galaxy collection install --collections-path /usr/share/ansible/collections community.docker
+          ansible-galaxy collection list
       - name: molecule
         uses: robertdebock/molecule-action@6.0.0
         with:
