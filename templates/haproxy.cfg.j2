@@ -32,6 +32,8 @@ defaults
 listen stats
     bind                 {{haproxy_stats_bind_addr }}:{{ haproxy_stats_port }}
     mode                 http
+    option               http-use-htx
+    http-request use-service prometheus-exporter if { path /metrics }
     stats                enable
     stats                uri /stats
 {% endif %}
