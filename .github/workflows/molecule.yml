@@ -62,9 +62,9 @@ jobs:
         run: sudo apparmor_parser -R /etc/apparmor.d/usr.sbin.mysqld
       - name: community.docker
         run: |
-          ansible-galaxy collection list
           ansible-galaxy collection install --collections-path /usr/share/ansible/collections community.docker
           ansible-galaxy collection list
+          pip3 list
       - name: molecule
         uses: robertdebock/molecule-action@6.0.1
         with:
