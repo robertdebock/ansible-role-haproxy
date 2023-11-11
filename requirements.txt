@@ -1,4 +1,3 @@
-# Pinning ansible-compat version due to [bug](https://github.com/ansible-community/molecule/issues/3903)
 ansible-compat == 4.*
 molecule == 6.*
 molecule-plugins[docker] == 23.*
