@@ -56,8 +56,6 @@ jobs:
         uses: actions/checkout@v3
         with:
           path: "${{ github.repository }}"
-      - name: community.docker
-        run: ansible-galaxy collection install --collections-path /usr/share/ansible/collections community.docker
       - name: molecule
         uses: robertdebock/molecule-action@6.0.1
         with:
