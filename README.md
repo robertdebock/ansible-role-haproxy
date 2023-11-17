@@ -1,4 +1,4 @@
-# Ansible role [haproxy](#haproxy)
+# [Ansible role haproxy](#haproxy)
 
 Install and configure haproxy on your system.
 
@@ -66,6 +66,17 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
               address: "127.0.0.2"
               port: 25
           port: 25
+        - name: vault
+          mode: tcp
+          httpcheck: GET /v1/sys/health HTTP/1.1
+          servers: "{{ groups['all'] }}"
+          http_send_name_header: Host
+          port: 8200
+          options:
+            - check
+            - check-ssl
+            - ssl verify none
+
       haproxy_listen_default_balance: roundrobin
       haproxy_listens:
         - name: listen

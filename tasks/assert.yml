@@ -161,6 +161,7 @@
   ansible.builtin.assert:
     that:
       - item.httpcheck is boolean
+        or item.httpcheck is string
     quiet: yes
   loop: "{{ haproxy_backends }}"
   loop_control:
