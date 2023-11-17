@@ -47,15 +47,15 @@ frontend {{ frontend.name }}
 
 {% for backend in haproxy_backends %}
 backend {{ backend.name }}
-{% if backend.httpcheck is defined and backend.httpcheck %}
+{% if backend.httpcheck is defined and backend.httpcheck_method is defined and backend.httpcheck %}
     option httpchk {% if backend.httpcheck_method is defined %}{{ backend.httpcheck_method }}{% endif %}
+{% elif backend.httpcheck is defined and backend.httpcheck %}
+    option httpchk
 {% endif %}
 
-{% if backend.http_check is defined and backend.http_check is mapping %}
+{% if backend.http_check is defined %}
     http-check send meth {{ backend.http_check.send.method }} uri {{ backend.http_check.send.uri }}
     http-check expect {{ backend.http_check.expect }}
-{% elif backend.http_check is defined and backend.http_check is string %}
-    http-check {{ backend.http_check }}
 {% endif %}
     balance {{ backend.balance | default(haproxy_backend_default_balance) }}
     mode {{ backend.mode | default('http') }}
