@@ -1,8 +1,8 @@
 ---
 - name: Verify
   hosts: all
-  become: yes
-  gather_facts: no
+  become: true
+  gather_facts: false
 
   tasks:
     - name: Install testing requirements
@@ -22,7 +22,7 @@
     - name: Check of content can be retrieved
       ansible.builtin.uri:
         url: "{{ item }}"
-        validate_certs: no
+        validate_certs: false
         status_code:
           - 200
       loop:
@@ -32,7 +32,7 @@
     - name: Check if stats are available
       ansible.builtin.shell:
         cmd: "echo 'show stat' | socat unix-connect:/var/lib/haproxy/stats stdio"
-      changed_when: no
+      changed_when: false
 
   handlers:
     - name: Uninstall testing requirements

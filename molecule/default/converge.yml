@@ -1,8 +1,8 @@
 ---
 - name: Converge
   hosts: all
-  become: yes
-  gather_facts: yes
+  become: true
+  gather_facts: true
 
   roles:
     - role: ansible-role-haproxy
@@ -15,7 +15,7 @@
           address: "*"
           port: 443
           default_backend: backend
-          ssl: yes
+          ssl: true
           crts:
             - /tmp/haproxy.keycrt
         - name: smtp
@@ -26,7 +26,7 @@
       haproxy_backend_default_balance: roundrobin
       haproxy_backends:
         - name: backend
-          httpcheck: yes
+          httpcheck: true
           # You can tell how the health check must be done.
           # This requires haproxy version 2
           # http_check:
@@ -68,7 +68,7 @@
       haproxy_listens:
         - name: listen
           address: "*"
-          httpcheck: yes
+          httpcheck: true
           listen_port: 8081
           balance: roundrobin
           # You can refer to hosts in an Ansible group.

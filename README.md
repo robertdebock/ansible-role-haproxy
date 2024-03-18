@@ -14,8 +14,8 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
 ---
 - name: Converge
   hosts: all
-  become: yes
-  gather_facts: yes
+  become: true
+  gather_facts: true
 
   roles:
     - role: robertdebock.haproxy
@@ -28,7 +28,7 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
           address: "*"
           port: 443
           default_backend: backend
-          ssl: yes
+          ssl: true
           crts:
             - /tmp/haproxy.keycrt
         - name: smtp
@@ -39,7 +39,7 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
       haproxy_backend_default_balance: roundrobin
       haproxy_backends:
         - name: backend
-          httpcheck: yes
+          httpcheck: true
           # You can tell how the health check must be done.
           # This requires haproxy version 2
           # http_check:
@@ -81,7 +81,7 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
       haproxy_listens:
         - name: listen
           address: "*"
-          httpcheck: yes
+          httpcheck: true
           listen_port: 8081
           balance: roundrobin
           # You can refer to hosts in an Ansible group.
@@ -98,8 +98,8 @@ The machine needs to be prepared. In CI this is done using [`molecule/default/pr
 ---
 - name: Prepare
   hosts: all
-  become: yes
-  gather_facts: no
+  become: true
+  gather_facts: false
 
   roles:
     - role: robertdebock.bootstrap
@@ -146,7 +146,7 @@ The default values for the variables are set in [`defaults/main.yml`](https://gi
 # defaults file for haproxy
 
 # Configure stats in HAProxy?
-haproxy_stats: yes
+haproxy_stats: true
 haproxy_stats_port: 1936
 haproxy_stats_bind_addr: "0.0.0.0"
 
