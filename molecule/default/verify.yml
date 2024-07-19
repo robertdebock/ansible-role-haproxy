@@ -18,6 +18,7 @@
       loop:
         - 80
         - 443
+        - 8405
 
     - name: Check of content can be retrieved
       ansible.builtin.uri:
@@ -28,10 +29,11 @@
       loop:
         - "http://localhost/"
         - "https://localhost/"
+        - "http://localhost:8405/"
 
     - name: Check if stats are available
       ansible.builtin.shell:
-        cmd: "echo 'show stat' | socat unix-connect:/var/lib/haproxy/stats stdio"
+        cmd: "set -o pipefail && echo 'show stat' | socat unix-connect:/var/lib/haproxy/stats stdio"
       changed_when: false
 
   handlers:

@@ -23,6 +23,12 @@
           port: 25
           default_backend: smtp
           mode: tcp
+        - name: prometheus
+          address: "*"
+          port: 8405
+          mode: http
+          http_request: use-service prometheus-exporter
+          no_log: true
       haproxy_backend_default_balance: roundrobin
       haproxy_backends:
         - name: backend
