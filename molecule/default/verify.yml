@@ -33,7 +33,7 @@
 
     - name: Check if stats are available
       ansible.builtin.shell:
-        cmd: "echo 'show stat' | socat unix-connect:/var/lib/haproxy/stats stdio"
+        cmd: "bash -o pipefail -c 'echo 'show stat' | socat unix-connect:/var/lib/haproxy/stats stdio'"
       changed_when: false
 
   handlers:
