@@ -26,10 +26,10 @@ molecule:
         python: ['python:3.8', 'python:3.9', 'python:3.10']
       - image: "fedora"
         tag: "39"
-        python: ['python:3.8', 'python:3.9', 'python:3.10']
+        python: ['python:3.10']
       - image: "fedora"
         tag: "latest"
-        python: ['python:3.8', 'python:3.9', 'python:3.10']
+        python: ['python:3.10']
       - image: "ubuntu"
         tag: "latest"
         python: ['python:3.8', 'python:3.9', 'python:3.10']
