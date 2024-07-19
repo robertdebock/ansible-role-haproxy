@@ -8,3 +8,6 @@ matrix_overrides:
   fedora:
     python:
       - python:3.10
+  ubuntu:
+    python:
+      - python:3.10
