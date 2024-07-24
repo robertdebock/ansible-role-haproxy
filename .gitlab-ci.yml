@@ -17,13 +17,13 @@ molecule:
     matrix:
       - image: "enterpriselinux"
         tag: "latest"
-        python: ['python:3.8', 'python:3.9', 'python:3.10']
+        python: ['python:3.9', 'python:3.10']
       - image: "debian"
         tag: "latest"
-        python: ['python:3.8', 'python:3.9', 'python:3.10']
+        python: ['python:3.9', 'python:3.10']
       - image: "debian"
         tag: "bullseye"
-        python: ['python:3.8', 'python:3.9', 'python:3.10']
+        python: ['python:3.9', 'python:3.10']
       - image: "fedora"
         tag: "39"
         python: ['python:3.10']
