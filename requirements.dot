@@ -1,0 +1,21 @@
+digraph PhiloDilemma {
+  label = "Robert de Bock" ;
+  overlap=false
+  {
+    "haproxy" [fillcolor=yellow style=filled penwidth=3]
+    "robertdebock.bootstrap" [fillcolor=green style=filled]
+    "robertdebock.buildtools" [fillcolor=green style=filled]
+    "robertdebock.core_dependencies" [fillcolor=green style=filled]
+    "robertdebock.epel" [fillcolor=green style=filled]
+    "robertdebock.httpd" [fillcolor=green style=filled]
+    "robertdebock.openssl" [fillcolor=green style=filled]
+    "robertdebock.python_pip" [fillcolor=green style=filled]
+  }
+  "haproxy" -> "robertdebock.bootstrap"
+  "haproxy" -> "robertdebock.buildtools"
+  "haproxy" -> "robertdebock.core_dependencies"
+  "haproxy" -> "robertdebock.epel"
+  "haproxy" -> "robertdebock.httpd"
+  "haproxy" -> "robertdebock.openssl"
+  "haproxy" -> "robertdebock.python_pip"
+}
