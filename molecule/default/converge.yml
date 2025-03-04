@@ -5,7 +5,7 @@
   gather_facts: true
 
   roles:
-    - role: ansible-role-haproxy
+    - role: robertdebock.haproxy
       haproxy_frontends:
         - name: http
           address: "*"
