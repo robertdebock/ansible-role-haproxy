@@ -18,7 +18,7 @@ molecule:
     - if [ -f requirements.yml ]; then ansible-galaxy install -r requirements.yml; fi
     # Create proper role directory structure for molecule
     - mkdir -p ~/.ansible/roles
-    - ln -s $CI_PROJECT_DIR ~/.ansible/roles/robertdebock.tailscale
+    - ln -s $CI_PROJECT_DIR ~/.ansible/roles/robertdebock.haproxy
     # Run molecule tests
     - cd $CI_PROJECT_DIR
     - ANSIBLE_ROLES_PATH=~/.ansible/roles:$CI_PROJECT_DIR molecule test

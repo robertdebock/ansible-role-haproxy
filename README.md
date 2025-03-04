@@ -18,7 +18,7 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
   gather_facts: true
 
   roles:
-    - role: ansible-role-haproxy
+    - role: robertdebock.haproxy
       haproxy_frontends:
         - name: http
           address: "*"

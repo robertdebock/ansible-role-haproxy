@@ -50,7 +50,7 @@ jobs:
       - name: checkout
         uses: actions/checkout@v4
         with:
-          path: ansible-role-tailscale
+          path: ansible-role-haproxy
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -75,20 +75,20 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install ansible-lint molecule molecule-plugins[docker] ansible-core
-          if [ -f ansible-role-tailscale/requirements.txt ]; then pip install -r ansible-role-tailscale/requirements.txt; fi
-          if [ -f ansible-role-tailscale/requirements.yml ]; then ansible-galaxy install -r ansible-role-tailscale/requirements.yml; fi
+          if [ -f ansible-role-haproxy/requirements.txt ]; then pip install -r ansible-role-haproxy/requirements.txt; fi
+          if [ -f ansible-role-haproxy/requirements.yml ]; then ansible-galaxy install -r ansible-role-haproxy/requirements.yml; fi
 
           # Create proper role directory structure for molecule
           mkdir -p ~/.ansible/roles
-          ln -s ${GITHUB_WORKSPACE}/ansible-role-tailscale ~/.ansible/roles/robertdebock.tailscale
+          ln -s ${GITHUB_WORKSPACE}/ansible-role-haproxy ~/.ansible/roles/robertdebock.haproxy
 
       - name: Test with molecule
         run: |
-          cd ansible-role-tailscale
+          cd ansible-role-haproxy
           molecule test
         env:
           PY_COLORS: 1
           ANSIBLE_FORCE_COLOR: 1
-          ANSIBLE_ROLES_PATH: ~/.ansible/roles:${GITHUB_WORKSPACE}/ansible-role-tailscale
+          ANSIBLE_ROLES_PATH: ~/.ansible/roles:${GITHUB_WORKSPACE}/ansible-role-haproxy
           image: ${{ matrix.distro.image }}
           tag: ${{ matrix.distro.tag }}
