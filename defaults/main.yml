@@ -7,6 +7,13 @@ haproxy_stats_port: 1936
 haproxy_stats_bind_addr: "0.0.0.0"
 
 # Default setttings for HAProxy.
+haproxy_mode: http
+haproxy_options:
+  - httplog
+  - dontlognull
+  - http-server-close
+  - forwardfor except 127.0.0.0/8
+  - redispatch
 haproxy_retries: 3
 haproxy_timeout_http_request: 10s
 haproxy_timeout_connect: 10s

@@ -11,13 +11,11 @@ global
     stats       socket /var/lib/haproxy/stats
 
 defaults
-    mode                    http
+    mode                    {{ haproxy_mode }}
     log                     global
-    option                  httplog
-    option                  dontlognull
-    option                  http-server-close
-    option                  forwardfor except 127.0.0.0/8
-    option                  redispatch
+{% for option in haproxy_options %}
+    option                  {{ option }}
+{% endfor %}
     retries                 {{ haproxy_retries }}
     timeout http-request    {{ haproxy_timeout_http_request }}
     timeout queue           {{ haproxy_timeout_check }}

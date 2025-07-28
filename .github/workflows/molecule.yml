@@ -20,7 +20,7 @@ jobs:
       - name: checkout
         uses: actions/checkout@v4
       - name: ansible-lint
-        uses: ansible-community/ansible-lint-action@main
+        uses: ansible/ansible-lint@main
 
   molecule:
     needs:
