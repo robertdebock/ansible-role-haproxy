@@ -17,14 +17,14 @@ defaults
     option                  {{ option }}
 {% endfor %}
     retries                 {{ haproxy_retries }}
-{% if haproxy_timeout_http_request is defined %}
+{% if haproxy_timeout_http_request %}
     timeout http-request    {{ haproxy_timeout_http_request }}
 {% endif %}
     timeout queue           {{ haproxy_timeout_check }}
     timeout connect         {{ haproxy_timeout_connect }}
     timeout client          {{ haproxy_timeout_client }}
     timeout server          {{ haproxy_timeout_server }}
-{% if haproxy_timeout_http_keep_alive is defined %}
+{% if haproxy_timeout_http_keep_alive %}
     timeout http-keep-alive {{ haproxy_timeout_http_keep_alive }}
 {% endif %}
     timeout check           {{ haproxy_timeout_check }}
