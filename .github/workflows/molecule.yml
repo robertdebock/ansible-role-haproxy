@@ -55,7 +55,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.13"
+          python-version: "3.11"
 
       - name: Configure Docker for systemd
         run: |
@@ -90,6 +90,5 @@ jobs:
           PY_COLORS: 1
           ANSIBLE_FORCE_COLOR: 1
           ANSIBLE_ROLES_PATH: ~/.ansible/roles:${GITHUB_WORKSPACE}/ansible-role-haproxy
-          ALLOW_BROKEN_CONDITIONALS: true
           image: ${{ matrix.distro.image }}
           tag: ${{ matrix.distro.tag }}
