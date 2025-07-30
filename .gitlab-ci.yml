@@ -13,15 +13,17 @@ molecule:
     - echo '{"features":{"buildkit":true},"exec-opts":["native.cgroupdriver=systemd"]}' > /etc/docker/daemon.json
     - service docker restart || true
     # Install dependencies and run tests
-    - pip install --no-cache-dir ansible-lint molecule molecule-plugins[docker] ansible-core
-    - if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-    - if [ -f requirements.yml ]; then ansible-galaxy install -r requirements.yml; fi
+      python -m pip install --upgrade pip
+      pip3 install ansible molecule molecule-plugins[docker] docker
+    # - if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    # - if [ -f requirements.yml ]; then ansible-galaxy install -r requirements.yml; fi
     # Create proper role directory structure for molecule
-    - mkdir -p ~/.ansible/roles
-    - ln -s $CI_PROJECT_DIR ~/.ansible/roles/robertdebock.haproxy
+    # - mkdir -p ~/.ansible/roles
+    # - ln -s $CI_PROJECT_DIR ~/.ansible/roles/robertdebock.haproxy
     # Run molecule tests
     - cd $CI_PROJECT_DIR
-    - ANSIBLE_ROLES_PATH=~/.ansible/roles:$CI_PROJECT_DIR molecule test
+    # - ANSIBLE_ROLES_PATH=~/.ansible/roles:$CI_PROJECT_DIR molecule test
+    - molecule test
   rules:
     - if: $CI_COMMIT_REF_NAME == "master"
   parallel:
