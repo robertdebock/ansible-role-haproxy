@@ -1,5 +1,8 @@
 {{ ansible_managed | comment }}
 
+{% if haproxy_config is defined and haproxy_config | length > 0 %}
+{{ haproxy_config }}
+{% else %}
 global
     log         127.0.0.1 local2
     chroot      /var/lib/haproxy
@@ -100,3 +103,4 @@ listen {{ listen.name }}
 {% endif %}
 {% endfor %}
 {% endfor %}
+{% endif %}
