@@ -3,17 +3,10 @@
 - name: assert | Test haproxy_config usage
   ansible.builtin.assert:
     that:
-      - haproxy_config is defined
       - haproxy_config is string
     quiet: true
-
-- name: assert | Test haproxy_config exclusive usage
-  ansible.builtin.assert:
-    that:
-      - (haproxy_config | length > 0 and haproxy_stats is defined and haproxy_stats == false and haproxy_frontends | length == 0 and haproxy_backends | length == 0 and haproxy_listens | length == 0)
-        or (haproxy_config | length == 0)
-    quiet: true
-    fail_msg: "When haproxy_config is provided, individual parameters should not be used. Either use haproxy_config OR individual parameters, not both."
+  when
+    - haproxy_config is defined
 
 - name: assert | Test individual parameters
   when:
