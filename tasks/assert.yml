@@ -5,7 +5,7 @@
     that:
       - haproxy_config is string
     quiet: true
-  when
+  when:
     - haproxy_config is defined
 
 - name: assert | Test individual parameters
