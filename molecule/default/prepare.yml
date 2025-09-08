@@ -10,6 +10,7 @@
     - role: robertdebock.epel
     - role: robertdebock.buildtools
     - role: robertdebock.python_pip
+      python_pip_update: false
     - role: robertdebock.openssl
       openssl_key_directory: /tmp
       openssl_items:
