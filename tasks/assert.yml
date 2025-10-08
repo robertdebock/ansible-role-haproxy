@@ -20,6 +20,13 @@
           - haproxy_mode in [ "http", "tcp" ]
         quiet: true
 
+    - name: assert | Test haproxy_globals
+      ansible.builtin.assert:
+        that:
+          - haproxy_globals is defined
+          - haproxy_globals is iterable
+        quiet: true
+
     - name: assert | Test haproxy_options
       ansible.builtin.assert:
         that:
