@@ -144,6 +144,18 @@
       when:
         - item.http_request is defined
 
+    - name: assert | Test optional item http_response in haproxy_frontends
+      ansible.builtin.assert:
+        that:
+          - item.http_response is string
+          - item.http_response is not none
+        quiet: true
+      loop: "{{ haproxy_frontends }}"
+      loop_control:
+        label: "{{ item.name }}"
+      when:
+        - item.http_response is defined
+
     - name: assert | Test optional item no_log in haproxy_frontends
       ansible.builtin.assert:
         that:
