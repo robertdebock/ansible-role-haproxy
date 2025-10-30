@@ -53,6 +53,9 @@ frontend {{ frontend.name }}
 {% if frontend.http_request is defined %}
     http-request {{ frontend.http_request }}
 {% endif %}
+{% if frontend.http_response is defined %}
+    http-response {{ frontend.http_response }}
+{% endif %}
 {% if frontend.no_log is defined and frontend.no_log %}
     no log
 {% endif %}
