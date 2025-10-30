@@ -113,7 +113,6 @@ The machine needs to be prepared. In CI this is done using [`molecule/default/pr
     - role: robertdebock.epel
     - role: robertdebock.buildtools
     - role: robertdebock.python_pip
-      python_pip_update: false
     - role: robertdebock.openssl
       openssl_key_directory: /tmp
       openssl_items:
@@ -270,7 +269,7 @@ This role has been tested on these [container images](https://hub.docker.com/u/r
 |[EL](https://hub.docker.com/r/robertdebock/enterpriselinux)|9|
 |[Debian](https://hub.docker.com/r/robertdebock/debian)|all|
 |[Fedora](https://hub.docker.com/r/robertdebock/fedora)|all|
-|[Ubuntu](https://hub.docker.com/r/robertdebock/ubuntu)|all|
+|[Ubuntu](https://hub.docker.com/r/robertdebock/ubuntu)|noble, jammy|
 
 The minimum version of Ansible required is 2.12, tests have been done on:
 
