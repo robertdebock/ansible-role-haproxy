@@ -28,6 +28,7 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
           address: "*"
           port: 443
           default_backend: backend
+          http_response: set-header Strict-Transport-Security max-age=63072000
           ssl: true
           crts:
             - /tmp/haproxy.keycrt
@@ -210,6 +211,15 @@ haproxy_stats_bind_addr: "0.0.0.0"
 
 # Default setttings for HAProxy.
 haproxy_mode: http
+haproxy_globals:
+  - log 127.0.0.1 local2
+  - chroot /var/lib/haproxy
+  - pidfile /var/run/haproxy.pid
+  - maxconn 4000
+  - user haproxy
+  - group haproxy
+  - daemon
+  - stats socket /var/lib/haproxy/stats
 haproxy_options:
   - httplog
   - dontlognull
