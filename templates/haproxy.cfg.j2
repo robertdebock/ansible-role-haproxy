@@ -39,7 +39,7 @@ listen stats
 {% for frontend in haproxy_frontends %}
 frontend {{ frontend.name }}
 {%- for address in (frontend.address if frontend.address is not string else [frontend.address]) +%}
-    bind {{ address }}:{{ frontend.port }}{% if frontend.ssl is defined and frontend.ssl == true %} ssl{% endif %}{% if frontend.crts is defined and frontend.crts | length > 0 %} {% for crt in frontend.crts %} crt {{ crt }}{% endfor %}{% endif %}
+    bind {{ address }}:{{ frontend.port }}{% if frontend.address == '::' %} v6only{% endif %}{% if frontend.ssl is defined and frontend.ssl == true %} ssl{% endif %}{% if frontend.crts is defined and frontend.crts | length > 0 %} {% for crt in frontend.crts %} crt {{ crt }}{% endfor %}{% endif %}
 {% endfor %}
 
 {% if frontend.default_backend is defined %}
