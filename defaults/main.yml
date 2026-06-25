@@ -58,7 +58,7 @@ haproxy_stats: true
 haproxy_stats_port: 1936
 haproxy_stats_bind_addr: "0.0.0.0"
 
-# Default setttings for HAProxy.
+# Default settings for HAProxy.
 haproxy_mode: http
 haproxy_globals:
   - log 127.0.0.1 local2
@@ -77,6 +77,7 @@ haproxy_options:
   - redispatch
 haproxy_retries: 3
 haproxy_timeout_http_request: 10s
+haproxy_timeout_queue: 10s
 haproxy_timeout_connect: 10s
 haproxy_timeout_client: 1m
 haproxy_timeout_server: 1m
