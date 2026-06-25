@@ -18,7 +18,7 @@ argument_specs:
       haproxy_globals:
         type: "list"
         default: ['log 127.0.0.1 local2', 'chroot /var/lib/haproxy', 'pidfile /var/run/haproxy.pid', 'maxconn 4000', 'user haproxy', 'group haproxy', 'daemon', 'stats socket /var/lib/haproxy/stats']
-        description: "A list of glboal settings for HAProxy"
+        description: "A list of global settings for HAProxy"
       haproxy_options:
         type: "list"
         default: ["httplog", "dontlognull", "http-server-close", "forwardfor except 127.0.0.0/8", "redispatch"]
@@ -43,6 +43,10 @@ argument_specs:
         type: "str"
         default: "10s"
         description: "The timeout for HTTP requests."
+      haproxy_timeout_queue:
+        type: "str"
+        default: "10s"
+        description: "The timeout for queued connections."
       haproxy_timeout_connect:
         type: "str"
         default: "10s"
