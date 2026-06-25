@@ -1,4 +1,4 @@
-{{ ansible_managed | comment }}
+{{ "Managed by Ansible, do not edit manually." | comment }}
 
 {% if haproxy_config is defined and haproxy_config | length > 0 %}
 {{ haproxy_config }}
@@ -18,7 +18,7 @@ defaults
 {% if haproxy_timeout_http_request %}
     timeout http-request    {{ haproxy_timeout_http_request }}
 {% endif %}
-    timeout queue           {{ haproxy_timeout_check }}
+    timeout queue           {{ haproxy_timeout_queue }}
     timeout connect         {{ haproxy_timeout_connect }}
     timeout client          {{ haproxy_timeout_client }}
     timeout server          {{ haproxy_timeout_server }}
@@ -87,7 +87,7 @@ backend {{ backend.name }}
 listen {{ listen.name }}
     bind {{ listen.address }}:{{ listen.listen_port }}{% if listen.ssl is defined and listen.ssl == true %} ssl{% endif %}{% if listen.crts is defined and listen.crts | length >0 %}{% for crt in listen.crts %} crt {{ crt }}{% endfor %}{% endif %}
 
-{% if listen.httpcheck %}
+{% if listen.httpcheck is defined and listen.httpcheck %}
     option httpchk {% if listen.httpcheck_method is defined %}{{ listen.httpcheck_method }}{% endif %}
 {% endif %}
 
@@ -95,9 +95,9 @@ listen {{ listen.name }}
     mode {{ listen.mode | default('tcp') }}
 {% for server in listen.servers %}
 {% if server.name is defined %}
-    server {{ server.name }} {{ server.address | default(hostvars[server.name]['ansible_facts']['default_ipv4']['address']) }}:{{ server.port | default(listen.port) }} {{ listen.options | join(' ') }}
+    server {{ server.name }} {{ server.address | default(hostvars[server.name]['ansible_facts']['default_ipv4']['address']) }}:{{ server.port | default(listen.port) }}{% if listen.options is defined %} {{ listen.options | join(' ') }}{% endif %}
 {% else %}
-    server {{ server }} {{ hostvars[server]['ansible_facts']['default_ipv4']['address'] }}:{{ listen.port }} {{ listen.options | join(' ') }}
+    server {{ server }} {{ hostvars[server]['ansible_facts']['default_ipv4']['address'] }}:{{ listen.port }}{% if listen.options is defined %} {{ listen.options | join(' ') }}{% endif %}
 {% endif %}
 {% endfor %}
 {% endfor %}

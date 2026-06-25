@@ -75,6 +75,7 @@
         quiet: true
       loop:
         - "{{ haproxy_timeout_http_request }}"
+        - "{{ haproxy_timeout_queue }}"
         - "{{ haproxy_timeout_connect }}"
         - "{{ haproxy_timeout_client }}"
         - "{{ haproxy_timeout_server }}"
@@ -201,10 +202,7 @@
             or item.balance is undefined
           - item.servers is defined
           - item.servers is iterable
-          - item.port is defined
-          - item.port is number
-          - item.port > 0
-          - item.port < 65536
+          - (item.port is defined and item.port is number and item.port > 0 and item.port < 65536) or item.port is undefined
           - (item.options is defined and item.options is iterable) or item.options is undefined
         quiet: true
       loop: "{{ haproxy_backends }}"
