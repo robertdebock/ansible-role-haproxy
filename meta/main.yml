@@ -9,9 +9,7 @@ galaxy_info:
   platforms:
     - name: Debian
       versions:
-        - bullseye
-        - bookworm
-        - trixie
+        - all
     - name: EL
       versions:
         - all
