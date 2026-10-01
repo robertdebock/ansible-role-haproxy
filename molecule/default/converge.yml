@@ -30,6 +30,12 @@
           mode: http
           http_request: use-service prometheus-exporter
           no_log: true
+        - name: multi-address
+          address:
+            - "*"
+            - "::"
+          default_backend: backend
+          port: 8443
       haproxy_backend_default_balance: roundrobin
       haproxy_backends:
         - name: backend

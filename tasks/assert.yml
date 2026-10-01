@@ -104,7 +104,7 @@
           - item.name is string
           - item.name is not none
           - item.address is defined
-          - item.address is string
+          - item.address is string or (item.address is iterable and item.address is not mapping)
           - item.address is not none
           - item.port is defined
           - item.port is number
@@ -298,7 +298,7 @@
           - item.name is string
           - item.name is not none
           - item.address is defined
-          - item.address is string
+          - item.address is string or (item.address is iterable and item.address is not mapping)
           - item.address is not none
           - (item.balance is defined
             and item.balance is string

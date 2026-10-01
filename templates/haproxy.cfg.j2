@@ -38,7 +38,9 @@ listen stats
 
 {% for frontend in haproxy_frontends %}
 frontend {{ frontend.name }}
-    bind {{ frontend.address }}:{{ frontend.port }}{% if frontend.address == '::' %} v6only{% endif %}{% if frontend.ssl is defined and frontend.ssl == true %} ssl{% endif %}{% if frontend.crts is defined and frontend.crts | length > 0 %} {% for crt in frontend.crts %} crt {{ crt }}{% endfor %}{% endif %}
+{%- for address in (frontend.address if frontend.address is not string else [frontend.address]) +%}
+    bind {{ address }}:{{ frontend.port }}{% if frontend.address == '::' %} v6only{% endif %}{% if frontend.ssl is defined and frontend.ssl == true %} ssl{% endif %}{% if frontend.crts is defined and frontend.crts | length > 0 %} {% for crt in frontend.crts %} crt {{ crt }}{% endfor %}{% endif %}
+{% endfor %}
 
 {% if frontend.default_backend is defined %}
     default_backend {{ frontend.default_backend }}
@@ -85,7 +87,9 @@ backend {{ backend.name }}
 
 {% for listen in haproxy_listens %}
 listen {{ listen.name }}
-    bind {{ listen.address }}:{{ listen.listen_port }}{% if listen.ssl is defined and listen.ssl == true %} ssl{% endif %}{% if listen.crts is defined and listen.crts | length >0 %}{% for crt in listen.crts %} crt {{ crt }}{% endfor %}{% endif %}
+{%- for address in (listen.address if listen.address is not string else [listen.address]) +%}
+    bind {{ address }}:{{ listen.listen_port }}{% if listen.ssl is defined and listen.ssl == true %} ssl{% endif %}{% if listen.crts is defined and listen.crts | length >0 %}{% for crt in listen.crts %} crt {{ crt }}{% endfor %}{% endif %}
+{% endfor %}
 
 {% if listen.httpcheck is defined and listen.httpcheck %}
     option httpchk {% if listen.httpcheck_method is defined %}{{ listen.httpcheck_method }}{% endif %}
