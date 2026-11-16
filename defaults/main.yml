@@ -1,6 +1,13 @@
 ---
 # defaults file for haproxy
 
+# Zenetys dropped the +quic build for 3.0 -- the repo now carries haproxy30z,
+# haproxy32z+quic and haproxy33z+quic, so haproxy30z+quic cannot be installed
+# on a new host any more. Hosts that already have it keep it; only a rebuild
+# notices. Overridable so a cluster that wants QUIC can move to 3.2 without
+# waiting on a release here.
+haproxy_package: haproxy30z
+
 # Complete HAProxy configuration as a string (alternative to individual parameters)
 # If set, this will be used instead of individual parameters
 # haproxy_config: |

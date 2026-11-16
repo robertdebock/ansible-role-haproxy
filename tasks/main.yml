@@ -24,7 +24,7 @@
 
 - name: Install haproxy
   ansible.builtin.package:
-    name: haproxy30z+quic
+    name: "{{ haproxy_package }}"
     state: present
   notify:
     - Restart haproxy
