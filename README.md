@@ -35,7 +35,7 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
         - name: smtp
           address: "*"
           port: 25
-          default_backend: smtp
+          default_backend: smtp_servers
           mode: tcp
         - name: prometheus
           address: "*"
@@ -61,7 +61,8 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
           port: 8080
           options:
             - check
-        - name: smtp
+        # HAProxy 3.3 and newer do not allow a frontend and a backend with the same name.
+        - name: smtp_servers
           balance: leastconn
           mode: tcp
           # You can also refer to a list of servers.
@@ -77,7 +78,7 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
           mode: tcp
           httpcheck: GET /v1/sys/health HTTP/1.1
           servers: "{{ groups['all'] }}"
-          http_send_name_header: Host
+          http_send_name_header: X-Backend-Server
           port: 8200
           options:
             - check
@@ -282,11 +283,7 @@ This role has been tested on these [container images](https://hub.docker.com/u/r
 |[Fedora](https://hub.docker.com/r/robertdebock/fedora)|all|
 |[Ubuntu](https://hub.docker.com/r/robertdebock/ubuntu)|jammy, noble|
 
-The minimum version of Ansible required is 2.12, tests have been done on:
-
-- The previous version.
-- The current version.
-- The development version.
+The minimum version of Ansible (ansible-core) required is 2.20, tests are done with the latest release of ansible-core.
 
 If you find issues, please register them on [GitHub](https://github.com/robertdebock/ansible-role-haproxy/issues).
 
